@@ -6,6 +6,6 @@
     <%= f.association :users, label_method: :first_name %>
   <% end %>
   <%= f.input :status, collection: Task.statuses.keys %>
-  <%= f.input :created_by, :input_html => { :value => current_user.id }, label: "Created_by User ID:" %>
+  <%= f.input :created_by, :as => :hidden, :input_html => { :value => current_user.id }, label: "Created_by User ID:" %>
   <%= f.submit %>
 <% end %>
