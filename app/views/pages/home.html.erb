@@ -4,7 +4,7 @@
   <br>
   <% if user_signed_in? %>
     <% if current_user.position != "employee" %>
-      <%= link_to "Add a Project", new_project_path() %><br>
+      <h1><%= link_to "Add a Project", new_project_path() %><br></h1>
     <% end %>
 
     <% @projects.each do |project| %>
@@ -17,13 +17,23 @@
           <%= "Start Date: #{project.start_date.strftime("%d %B")}" %><br>
           <%= "Status: #{project.status}" %><br>
           <%= "Progress: #{project.progress} %" %><br>
+          <% @tasks = Task.where(project_id: project.id) %>
+          <% @tasks_status = [] %>
+          <% @tasks.map do |task| %>
+            <% @tasks_status << task.status %>
+          <% end %>
+          <% hash = @tasks_status.inject(Hash.new(0)) { |total, e| total[e] += 1; total } %>
+          <%= "Tasks not started Count: #{hash["not_started"]}" %><br>
+          <%= "Tasks in progress Count: #{hash["in_progress"]}" %><br>
+          <%= "Tasks completed Count: #{hash["completed"]}" %><br>
+          <%= "Tasks deleted Count: #{hash["deleted"]}" %><br>
           <% "Project Team Members: #{array_project = project.users.each} " %>
                 <% array_project.map do |id|
                      id.first_name
                    end %>
                 <%= "Project Team Members: " %>
                 <% array_project.each do |user| %>
-                  <%= "#{user.first_name}    " %>
+                  <%= "#{user.first_name}  |  " %>
                 <% end %>
                 <br>
           <%= "Created by: #{User.find(project.created_by).first_name}" %><br>
@@ -47,6 +57,7 @@
                 <h4><%= "Task: #{task.name}" %><br></h4>
                 <%= "Due: #{task.due_date.strftime("%d %B")}" %><br>
                 <%= "Status: #{task.status}" %><br>
+                <%= "Priority: #{task.priority}" %><br>
                 <%= "Description: #{task.description}" %><br>
                 <% "User IDS Assigned: #{array = task.users.each} " %>
                 <% array.map do |id|
@@ -54,7 +65,7 @@
                    end %>
                 <%= "Assigned Users: " %>
                 <% array.each do |user| %>
-                  <%= "#{user.first_name}  " %>
+                  <%= "#{user.first_name} | " %>
                 <% end %>
                 <br>
                 <%= link_to "Edit this task", edit_task_path(task) %><br>
