@@ -3,6 +3,10 @@
 
   <br>
   <% if user_signed_in? %>
+    <% if current_user.position != "employee" %>
+      <%= link_to "Add a Project", new_project_path() %><br>
+    <% end %>
+
     <% @projects.each do |project| %>
       <% if project.user_ids.include?(current_user.id) || current_user.id == project.created_by %>
       <br>
@@ -18,7 +22,6 @@
           <%= link_to " Add a task to this project", new_project_task_path(project) %>
           <% if current_user.position != "employee" %>
             <br>
-            <%= link_to "Add a Project", new_project_path() %><br>
             <%= link_to "Edit this project", edit_project_path(project) %><br>
             <%= link_to "Delete",
                         project_path(project),
