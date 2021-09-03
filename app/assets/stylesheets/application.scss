@@ -11,3 +11,27 @@
 // Your CSS partials
 @import "components/index";
 @import "pages/index";
+
+.card-container {
+  background-color: rgb(174, 192, 209);
+  padding: 20px;
+  border-radius: 10px;
+}
+
+// .tasks-card {
+//   background-color: aliceblue;
+//   padding: 20px;
+//   border-radius: 10px;
+// }
+.container {
+  background-image: url("https://source.unsplash.com/random");
+  background-position: cover;
+  height: 1000vh;
+}
+
+.task {
+  background-color: rgb(227, 215, 172);
+  padding: 20px;
+  margin: 20px;
+  border-radius: 10px;
+}

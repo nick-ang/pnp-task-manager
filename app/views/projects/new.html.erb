@@ -1,0 +1,12 @@
+<%= simple_form_for (@project) do |f| %>
+  <%= f.input :name %>
+  <%= f.input :progress,
+              required: true,
+              hint: "Enter in %" %>
+  <%= f.input :end_date %>
+  <%= f.input :start_date %>
+  <%= f.association :users, label_method: :first_name %>
+  <%= f.input :status, collection: Project.statuses.keys %>
+  <%= f.input :created_by, :input_html => { :value => current_user.id }, label: "Created_by User ID:" %>
+  <%= f.submit %>
+<% end %>

@@ -1,2 +1,55 @@
-<h1>Pages#home</h1>
-<p>Find me in app/views/pages/home.html.erb</p>
+<div class = "container">
+  <br>
+
+  <br>
+  <% if user_signed_in? %>
+    <% @projects.each do |project| %>
+      <% if project.user_ids.include?(current_user.id) || current_user.id == project.created_by %>
+      <br>
+      <br>
+      <div class = "card-container">
+        <div class = "project-card">
+          <h2><%= "Project: #{project.name}" %></h2><br>
+          <%= "Start Date: #{project.start_date.strftime("%d %B")}" %><br>
+          <%= "Status: #{project.status}" %><br>
+          <%= "Progress: #{project.progress} %" %><br>
+          <%= "Project Team Member IDs: #{project.user_ids.each { |id| User.find(id).first_name }} " %><br>
+          <%= "Created by: #{User.find(project.created_by).first_name}" %><br>
+          <%= link_to " Add a task to this project", new_project_task_path(project) %>
+          <% if current_user.position != "employee" %>
+            <br>
+            <%= link_to "Add a Project", new_project_path() %><br>
+            <%= link_to "Edit this project", edit_project_path(project) %><br>
+            <%= link_to "Delete",
+                        project_path(project),
+                        method: :delete,
+                        data: { confirm: "Are you sure?" } %>
+            <% end %>
+        </div>
+          <br>
+          <br>
+        <div class = "tasks-card">
+          <h3>Tasks:</h3>
+            <% @tasks = Task.where(project_id: project.id) %>
+            <% @tasks.each do |task| %>
+              <div class = "task">
+                <%= "Task: #{task.name}" %><br>
+                <%= "Due: #{task.due_date.strftime("%d %B")}" %><br>
+                <%= "Status: #{task.status}" %><br>
+                <%= "Description: #{task.description}" %><br>
+                <%= "User IDS Assigned: #{task.user_ids.each { |id| User.find(id).first_name }} " %>
+                <br>
+                <%= link_to "Edit this task", edit_task_path(task) %><br>
+                <%= link_to "Delete",
+                            task_path(task),
+                            method: :delete,
+                            data: { confirm: "Are you sure?" } %>
+                <br>
+              </div>
+            <% end %>
+        </div>
+       </div>
+      <% end %>
+    <% end %>
+  <% end %>
+</div>
