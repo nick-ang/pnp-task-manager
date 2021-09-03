@@ -17,7 +17,15 @@
           <%= "Start Date: #{project.start_date.strftime("%d %B")}" %><br>
           <%= "Status: #{project.status}" %><br>
           <%= "Progress: #{project.progress} %" %><br>
-          <%= "Project Team Member IDs: #{project.user_ids.each { |id| User.find(id).first_name }} " %><br>
+          <% "Project Team Members: #{array_project = project.users.each} " %>
+                <% array_project.map do |id|
+                     id.first_name
+                   end %>
+                <%= "Project Team Members: " %>
+                <% array_project.each do |user| %>
+                  <%= "#{user.first_name}    " %>
+                <% end %>
+                <br>
           <%= "Created by: #{User.find(project.created_by).first_name}" %><br>
           <%= link_to " Add a task to this project", new_project_task_path(project) %>
           <% if current_user.position != "employee" %>
@@ -36,11 +44,18 @@
             <% @tasks = Task.where(project_id: project.id) %>
             <% @tasks.each do |task| %>
               <div class = "task">
-                <%= "Task: #{task.name}" %><br>
+                <h4><%= "Task: #{task.name}" %><br></h4>
                 <%= "Due: #{task.due_date.strftime("%d %B")}" %><br>
                 <%= "Status: #{task.status}" %><br>
                 <%= "Description: #{task.description}" %><br>
-                <%= "User IDS Assigned: #{task.user_ids.each { |id| User.find(id).first_name }} " %>
+                <% "User IDS Assigned: #{array = task.users.each} " %>
+                <% array.map do |id|
+                     id.first_name
+                   end %>
+                <%= "Assigned Users: " %>
+                <% array.each do |user| %>
+                  <%= "#{user.first_name}  " %>
+                <% end %>
                 <br>
                 <%= link_to "Edit this task", edit_task_path(task) %><br>
                 <%= link_to "Delete",
