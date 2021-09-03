@@ -1,9 +1,10 @@
-<h2>Sign up</h2>
+<div class="p-5">
+  <h2>Edit</h2>
 
-<%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-  <%= f.error_notification %>
+  <%= simple_form_for(@user) do |f| %>
+    <%= f.error_notification %>
 
-  <div class="form-inputs">
+    <div class="form-inputs">
     <%= f.input :first_name,
                 required: true,
                 autofocus: true,
@@ -11,15 +12,9 @@
     <%= f.input :last_name,
                 required: true,
                 input_html: { autocomplete: "last-name" } %>
-    <%= f.input :position,
-                hint: ("Please Select Your Position from the Three Categories"),
-                collection: User.positions.keys %>
     <%= f.input :phone,
                 required: true,
                 input_html: { autocomplete: "last-name" } %>
-    <%= f.input :gender,
-                hint: ("Please Select Your Gender"),
-                collection: User.genders.keys %>
     <%= f.input :email,
                 required: true,
                 autofocus: true,
@@ -31,11 +26,12 @@
     <%= f.input :password_confirmation,
                 required: true,
                 input_html: { autocomplete: "new-password" } %>
-  </div>
+    </div>
 
-  <div class="form-actions">
-    <%= f.button :submit, "Sign up" %>
-  </div>
-<% end %>
+    <div class="form-actions">
+      <%= f.button :submit, "Update" %>
+    </div>
+  <% end %>
 
-<%= render "devise/shared/links" %>
+  <%= link_to "Back", :back %>
+</div>

@@ -1,0 +1,11 @@
+<%= simple_form_for [@project, @task] do |f| %>
+  <%= f.input :name %>
+  <%= f.input :description %>
+  <%= f.input :due_date %>
+  <% if current_user.position != "employee" %>
+    <%= f.association :users, label_method: :first_name %>
+  <% end %>
+  <%= f.input :status, collection: Task.statuses.keys %>
+  <%= f.input :created_by, :input_html => { :value => current_user.id }, label: "Created_by User ID:" %>
+  <%= f.submit %>
+<% end %>

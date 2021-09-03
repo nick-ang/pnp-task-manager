@@ -6,7 +6,6 @@ class CreateProjects < ActiveRecord::Migration[6.1]
       t.datetime :end_date
       t.datetime :start_date
       t.integer :status
-      t.references :team, null: false, foreign_key: true
       t.datetime :date_created
       t.string :date_modified
       t.string :datetime
