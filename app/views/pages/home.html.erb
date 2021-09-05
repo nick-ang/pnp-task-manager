@@ -7,7 +7,8 @@
     <% if current_user.position != "employee" %>
       <h1><%= link_to "Add a Project", new_project_path() %><br></h1>
     <% end %>
-
+    <div id = "project-container" class = "project">
+    <nav class="nav flex-column">
     <% # Show all projects %>
     <% @projects.each do |project| %>
       <% if project.user_ids.include?(current_user.id) || current_user.id == project.created_by %>
@@ -58,79 +59,126 @@
                         data: { confirm: "Are you sure?" } %>
             <% end %>
         </div>
-          <br>
-          <br>
-        <div id = "container" class = "fluid-container">
-        <% # TASK CARDS %>
-        <div id = "in-progress" class = "col-3">
-        <h1>In progress</h1>
-        <div class = "card">
-          <h3>Tasks:</h3>
-            <% @tasks = Task.where(project_id: project.id) %>
-            <% @tasks.each do |task| %>
-              <div class = "task">
-                <h4><%= "Task: #{task.name}" %><br></h4>
-                <%= "Due: #{task.due_date.strftime("%d %B")}" %><br>
-                <%= "Status: #{task.status}" %><br>
-                <%= "Priority: #{task.priority}" %><br>
-                <%= "Description: #{task.description}" %><br>
-                <% "User IDS Assigned: #{array = task.users.each} " %>
-                <% array.map do |id|
-                     id.first_name
-                   end %>
-                <%= "Assigned Users: " %>
-                <% array.each do |user| %>
-                  <%= "#{user.first_name} | " %>
-                <% end %>
-                <br>
-                <%= link_to "Edit this task", edit_task_path(task) %><br>
-                <%= link_to "Delete",
-                            task_path(task),
-                            method: :delete,
-                            data: { confirm: "Are you sure?" } %>
-                <br>
-              </div>
-            <% end %>
         </div>
-       </div>
+        </nav>
+        </div>
+          <br>
+          <br>
 
+        <div id = "task-container" class = "fluid-container">
+        <div class = "row">
+        <% # TASK CARDS %>
 
-       <div id = "not-started" class = "col-3">
+        <div id = "In Progress" class = "col">
         <h1>Not Started</h1>
         <div class = "card">
           <h3>Tasks:</h3>
             <% @tasks = Task.where(project_id: project.id) %>
-            <% @tasks.each do |task| %>
-              <% if task.status = "not_started" %>
-              <div class = "task">
-                <h4><%= "Task: #{task.name}" %><br></h4>
-                <%= "Due: #{task.due_date.strftime("%d %B")}" %><br>
-                <%= "Status: #{task.status}" %><br>
-                <%= "Priority: #{task.priority}" %><br>
-                <%= "Project ID: #{task.project_id}" %><br>
-                <%= "Description: #{task.description}" %><br>
-                <% "User IDS Assigned: #{array = task.users.each} " %>
-                <% array.map do |id|
-                     id.first_name
-                   end %>
-                <%= "Assigned Users: " %>
-                <% array.each do |user| %>
-                  <%= "#{user.first_name} | " %>
-                <% end %>
-                <br>
-                <%= link_to "Edit this task", edit_task_path(task) %><br>
-                <%= link_to "Delete",
-                            task_path(task),
-                            method: :delete,
-                            data: { confirm: "Are you sure?" } %>
-                <br>
-              </div>
-                <% end %>
+            <% (0..@tasks.length - 1).each do |i| %>
+              <% if @tasks[i].status == "not_started" %>
+                <div class = "task">
+                  <h4><%= "Task: #{@tasks[i].name}" %><br></h4>
+                  <%= "Due: #{@tasks[i].due_date.strftime("%d %B")}" %><br>
+                  <%= "Status: #{@tasks[i].status}" %><br>
+                  <%= "Priority: #{@tasks[i].priority}" %><br>
+                  <%= "Project ID: #{@tasks[i].project_id}" %><br>
+                  <%= "Description: #{@tasks[i].description}" %><br>
+                  <% "User IDS Assigned: #{array = @tasks[i].users.each} " %>
+                  <% array.map do |id|
+                       id.first_name
+                     end %>
+                  <%= "Assigned Users: " %>
+                  <% array.each do |user| %>
+                    <%= "#{user.first_name} | " %>
+                  <% end %>
+                  <br>
+                  <%= link_to "Edit this @tasks[i]", edit_task_path(@tasks[i]) %><br>
+                  <%= link_to "Delete",
+                              task_path(@tasks[i]),
+                              method: :delete,
+                              data: { confirm: "Are you sure?" } %>
+                  <br>
+                </div>
+              <% end %>
             <% end %>
+
+        </div>
+       </div>
+
+        <div id = "In-Progress" class = "col">
+        <h1>In Progress</h1>
+        <div class = "card">
+          <h3>Tasks:</h3>
+            <% @tasks = Task.where(project_id: project.id) %>
+            <% (0..@tasks.length - 1).each do |i| %>
+              <% if @tasks[i].status == "in_progress" %>
+                <div class = "task">
+                  <h4><%= "Task: #{@tasks[i].name}" %><br></h4>
+                  <%= "Due: #{@tasks[i].due_date.strftime("%d %B")}" %><br>
+                  <%= "Status: #{@tasks[i].status}" %><br>
+                  <%= "Priority: #{@tasks[i].priority}" %><br>
+                  <%= "Project ID: #{@tasks[i].project_id}" %><br>
+                  <%= "Description: #{@tasks[i].description}" %><br>
+                  <% "User IDS Assigned: #{array = @tasks[i].users.each} " %>
+                  <% array.map do |id|
+                       id.first_name
+                     end %>
+                  <%= "Assigned Users: " %>
+                  <% array.each do |user| %>
+                    <%= "#{user.first_name} | " %>
+                  <% end %>
+                  <br>
+                  <%= link_to "Edit this @tasks[i]", edit_task_path(@tasks[i]) %><br>
+                  <%= link_to "Delete",
+                              task_path(@tasks[i]),
+                              method: :delete,
+                              data: { confirm: "Are you sure?" } %>
+                  <br>
+                </div>
+              <% end %>
+            <% end %>
+
+        </div>
+       </div>
+
+
+       <div id = "completed" class = "col">
+        <h1>Completed</h1>
+        <div class = "card">
+          <h3>Tasks:</h3>
+            <% @tasks = Task.where(project_id: project.id) %>
+            <% (0..@tasks.length - 1).each do |i| %>
+              <% if @tasks[i].status == "completed" %>
+                <div class = "task">
+                  <h4><%= "Task: #{@tasks[i].name}" %><br></h4>
+                  <%= "Due: #{@tasks[i].due_date.strftime("%d %B")}" %><br>
+                  <%= "Status: #{@tasks[i].status}" %><br>
+                  <%= "Priority: #{@tasks[i].priority}" %><br>
+                  <%= "Project ID: #{@tasks[i].project_id}" %><br>
+                  <%= "Description: #{@tasks[i].description}" %><br>
+                  <% "User IDS Assigned: #{array = @tasks[i].users.each} " %>
+                  <% array.map do |id|
+                       id.first_name
+                     end %>
+                  <%= "Assigned Users: " %>
+                  <% array.each do |user| %>
+                    <%= "#{user.first_name} | " %>
+                  <% end %>
+                  <br>
+                  <%= link_to "Edit this @tasks[i]", edit_task_path(@tasks[i]) %><br>
+                  <%= link_to "Delete",
+                              task_path(@tasks[i]),
+                              method: :delete,
+                              data: { confirm: "Are you sure?" } %>
+                  <br>
+                </div>
+              <% end %>
+            <% end %>
+
         </div>
        </div>
        </div>
-</div>
+       </div>
       <% end %>
     <% end %>
   <% end %>
