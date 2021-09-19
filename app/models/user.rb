@@ -7,6 +7,7 @@ class User < ApplicationRecord
   enum gender: %i[male female]
   has_many :project_assigns, dependent: :destroy
   has_many :projects, through: :project_assigns
-  has_many :tasks
+  has_many :tasks, through: :projects
+  has_many :notes
   # has_and_belongs_to_many :projects
 end

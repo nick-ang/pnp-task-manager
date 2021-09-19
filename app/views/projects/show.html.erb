@@ -14,13 +14,15 @@
           <br>
           <br>
           <%# Get project details %>
-          <%= render "pages/project_container", project: project, task: @tasks%>
           <%= render "pages/todo", project: project, task: @tasks%>
         </nav>
         <br>
         <br>
         <div id = "task-container" class = "fluid-container">
         </div>
+      </div>
+      <div class = "container col-3 p-3">
+        <%= render "pages/project_container", project: project, task: @tasks%>
       </div>
     </div>
   <% end %>

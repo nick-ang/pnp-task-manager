@@ -10,13 +10,32 @@
 
 // Your CSS partials
 @import "components/index";
+@import "components/wiki";
+@import "components/dashboard";
+@import "components/kanban";
 @import "pages/index";
 
-// .card-container {
-//   background-color: rgb(174, 192, 209);
-//   padding: 20px;
-//   border-radius: 10px;
-// }
+.container-fluid{
+  // background-image: url(https://source.unsplash.com/random);
+  height: 100%;
+}
+
+li {
+  list-style-type: none;
+}
+
+.project-card {
+  padding: 2px;
+  border-radius: 10px;
+  margin: auto;
+}
+
+.card {
+  padding: 2px;
+  border-radius: 10px;
+  margin-bottom: 10px;
+}
+
 
 // // .tasks-card {
 // //   background-color: aliceblue;
