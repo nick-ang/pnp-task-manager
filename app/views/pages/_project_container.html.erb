@@ -1,0 +1,41 @@
+<div class = "card-container">
+  <div class = "project-card">
+    <h2><%= "Project: #{project.name}" %></h2>
+    <br>
+    <%#= "Start Date: #{project.start_date.strftime("%d %B")}" %><br>
+    <%= "Status: #{project.status}" %><br>
+    <%= "Progress: #{project.progress} %" %><br>
+    <% @tasks = Task.where(project_id: project.id) %>
+    <% # tasks status %>
+    <% @tasks_status = [] %>
+    <% @tasks.map do |task| %>
+      <% @tasks_status << task.status %>
+    <% end %>
+    <% hash = @tasks_status.inject(Hash.new(0)) { |total, e| total[e] += 1; total } %>
+    <% # task Statuses %>
+    <%= "Tasks not started Count: #{hash["not_started"]}" %><br>
+    <%= "Tasks in progress Count: #{hash["in_progress"]}" %><br>
+    <%= "Tasks completed Count: #{hash["completed"]}" %><br>
+    <%= "Tasks deleted Count: #{hash["deleted"]}" %><br>
+    <% # project Team Members %>
+    <% "Project Team Members: #{array_project = project.users.each} " %>
+    <% array_project.map do |id|
+                     id.first_name
+                   end %>
+    <%= "Project Team Members: " %>
+    <% array_project.each do |user| %>
+      <%= "#{user.first_name}  |  " %>
+    <% end %>
+    <br>
+    <%= "Created by: #{User.find(project.created_by).first_name}" %><br>
+    <%= link_to " Add a task to this project", new_project_task_path(project) %>
+    <% if current_user.position != "employee" %>
+      <br>
+      <%= link_to "Edit this project", edit_project_path(project) %><br>
+      <%= link_to "Delete",
+                              project_path(project),
+                              method: :delete,
+                              data: { confirm: "Are you sure?" } %>
+    <% end %>
+  </div>
+</div>
