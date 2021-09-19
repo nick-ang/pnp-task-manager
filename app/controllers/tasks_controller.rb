@@ -3,6 +3,7 @@ class TasksController < ApplicationController
 
   def index
     @tasks = Task.where(project_id: params[:project_id])
+    @projects = Project.all
   end
 
   # def show

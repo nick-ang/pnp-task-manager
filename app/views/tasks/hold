@@ -1,0 +1,35 @@
+ <%# Checks if user is signed in %>
+<% if user_signed_in? %>
+  <div class="container-fluid d-flex mt-3">
+    <div class="sidebar col-3">
+      <h4>Projects</h4>
+      <%= render "shared/projects_sidebar", project: @projects %>
+      <%# <%= render "kanban", project: @project %>
+    </div>
+    <div class = "col-12">
+      <% # Check employee position allow to create project if not employee %>
+      <% if current_user.position != "employee" %>
+        <h1><%= link_to "Add a Project", new_project_path() %><br>
+        </h1>
+      <% end %>
+      <div id = "project-container" class = "project">
+        <nav class="nav flex-column">
+          <%# Show all projects %>
+          <% @projects.each do |project| %>
+            <% if project.user_ids.include?(current_user.id) || current_user.id == project.created_by %>
+              <br>
+              <br>
+              <%# Get project details %>
+              <%= render "project_container", project: project, task: @tasks%>
+            </nav>
+          </div>
+          <br>
+          <br>
+          <div id = "task-container" class = "fluid-container">
+            <%= render "todo", project: project, task: @tasks%>
+          </div>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+<% end %>
