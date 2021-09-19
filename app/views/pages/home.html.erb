@@ -6,40 +6,54 @@
       <%= render "shared/projects_sidebar", project: @projects %>
       <%# <%= render "kanban", project: @project %>
     </div>
-    <div class = "dashboard container">
-      <div class = "tasks d-flex card">
-        <%= pie_chart Task.group(:status).count %>
-        <%= bar_chart Project.group(:name).sum(:progress) %>
+    <div class = "dashboard container h-100">
+      <div class = "graph card">
+        <h4>Tasks</h4>
+        <%= pie_chart @tasks.group(:status).count %>
       </div>
-      <div class = "deadlines card-content">
-        <% @projects.each do |project|%>
-          <li>
+      <div class = "graph card">
+        <%= bar_chart @projects.group(:name).sum(:progress) %>
+      </div>
+      <div class = "deadlines card">
+        <h4>Deadlines</h4>
+        <div class = "deadlines-projects">
+          <h5>Projects</h5>
+          <% @projects.each do |project|%>
             <%= project.name %>
-            <% if project.end_date %>
-              <%= project.end_date.strftime("%d %B")%>
-            <% end %>
+          <% end %>
+        </div>
+        <div class = "deadlines-projects">
+          <h5>Start Date</h5>
+          <% @projects.each do |project|%>
             <% if project.start_date %>
               <%= project.start_date.strftime("%d %B")%>
             <% end %>
+          <% end %>
+        </div>
+        <div class = "deadlines-projects">
+          <h5>Deadlines</h5>
+          <% @projects.each do |project|%>
+            <% if project.end_date %>
+              <%= project.end_date.strftime("%d %B")%>
+            <% end %>
+          <% end %>
+        </div>
+      </div>
+      <div class = "members card">
+        <% @projects.each do |project|%>
+          <div>
             <li>
+              <%= project.name %>
+              <img src="" alt="">
+              <% "No. of members: #{array_project = project.users.each} " %>
+              <%= "No. of members #{array_project.size}" %>
+              <li>
+              </div>
             <% end %>
           </div>
-          <div class = "members card-content">
-            <% @projects.each do |project|%>
-              <li>
-                <%= project.name %>
-                <% "No. of members: #{array_project = project.users.each} " %>
-                <% array_project.map do |id|
-                     id.first_name
-                   end %>
-                <% "Project Team Members: " %>
-                <% array_project.each do |user| %>
-                  <% "#{user.first_name}  |  " %>
-                <% end %>
-                <%= "No. of members #{array_project.size}" %>
-                <li>
-                <% end %>
-              </div>
-            </div>
-          </div>
-        <% end %>
+        </div>
+        <div class ="notifications container col-3">
+          <h4>Notifications</h4>
+        </div>
+      </div>
+    <% end %>
