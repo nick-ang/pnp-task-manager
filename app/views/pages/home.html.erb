@@ -1,7 +1,73 @@
+<div class="container-fluid mt-3">
+  <div class="row">
+    <div class="col-3">
+      <h4>Projects</h4>
+
+      <nav class="nav flex-column">
+        <!-- Get Projects -->
+        <% @projects.each do |project| %>
+          <% if project.user_ids.include?(current_user.id) || current_user.id == project.created_by %>
+            <div class="card border border-secondary bg-white text-center rounded-lg mb-3">
+              <div class="card-body p-0 py-1">
+                <h5 class="card-title mb-0 text-left"><a class="nav-link stretched-link" href="#"><%= "#{project.name}" %></a></h5>
+              </div>
+            </div>
+          <% end %>
+        <% end %>
+
+        <div class="card border border-secondary bg-white text-center rounded-lg">
+          <div class="card-body p-0 py-1">
+            <i class="bi bi-plus" style="font-size: 1.75rem;"></i>
+            <h5 class="card-title mb-0 mt-n2"><%= link_to "Create New Project", new_project_path(), class: "nav-link stretched-link pt-0" %></h5>
+          </div>
+        </div>
+      </nav>
+    </div>
+
+    <div class="col-9">
+      <div class="container-fluid">
+        <div class="row">
+          <!-- Not Started Task -->
+          <div class="col">
+            <div class="d-flex align-items-center border-bottom border-dark mb-3">
+              <i class="bi bi-square" style="font-size: 1.5rem;"></i>
+              <h4 class="mb-0 ml-2">Not Started</h4>
+            </div>
+
+            <div class="card border border-secondary bg-white text-center rounded-lg">
+              <div class="card-body p-0 py-1">
+                <i class="bi bi-plus" style="font-size: 1.75rem;"></i>
+                <h5 class="card-title mb-0 mt-n2"><%= link_to "Add New Task", new_project_task_path(1), class: "nav-link stretched-link pt-0" %></h5>
+              </div>
+            </div>
+          </div>
+
+          <!-- Started Task -->
+          <div class="col">
+            <div class="d-flex align-items-center border-bottom border-dark mb-3">
+              <i class="bi bi-check2-square" style="font-size: 1.5rem;"></i>
+              <h4 class="mb-0 ml-2">Started</h4>
+            </div>
+          </div>
+
+          <!-- Completed Task -->
+          <div class="col">
+            <div class="d-flex align-items-center border-bottom border-dark mb-3">
+              <i class="bi bi-check2-square" style="font-size: 1.5rem; color: #db8f5b;"></i>
+              <h4 class="mb-0 ml-2">Completed</h4>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
 <div class = "col-12">
   <br>
   <br>
-  <% # Checks if user is signed in %>
+  <%# Checks if user is signed in %>
   <% if user_signed_in? %>
     <% # Check employee position %>
     <% if current_user.position != "employee" %>
@@ -10,17 +76,17 @@
     <% end %>
     <div id = "project-container" class = "project">
       <nav class="nav flex-column">
-        <% # Show all projects %>
+        <%# Show all projects %>
         <% @projects.each do |project| %>
           <% if project.user_ids.include?(current_user.id) || current_user.id == project.created_by %>
             <br>
             <br>
-            <% # Get project details %>
+            <%# Get project details %>
             <div class = "card-container">
               <div class = "project-card">
                 <h2><%= "Project: #{project.name}" %></h2>
                 <br>
-                <%= "Start Date: #{project.start_date.strftime("%d %B")}" %><br>
+                <%#= "Start Date: #{project.start_date.strftime("%d %B")}" %><br>
                 <%= "Status: #{project.status}" %><br>
                 <%= "Progress: #{project.progress} %" %><br>
                 <% @tasks = Task.where(project_id: project.id) %>
