@@ -21,9 +21,6 @@ class PagesController < ApplicationController
       elsif current_user.tasks
         @tasks = current_user.tasks
         @messages = Message.all
-        @tasks.each do |task|
-          task.status
-        end
       end
     end
   end
