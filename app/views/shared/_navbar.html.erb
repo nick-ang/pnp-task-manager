@@ -1,8 +1,14 @@
+
 <div class="navbar navbar-expand-sm navbar-light navbar">
+<% if user_signed_in? %>
   <%= link_to "#", class: "navbar-brand" do %>
     <a  href="<%= root_path %>">P&NP | HOME</a>
     <a  href="<%= wikis_path %>">Wikis</a>
     <a  href="<%= notes_path %>">Sticky Notes</a>
+    <% if current_user.admin %>
+      <a  href="<%= rails_admin_path %>">Admin Dashboard</a>
+    <% end %>
+  <% end %>
   <% end %>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
