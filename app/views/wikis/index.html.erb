@@ -7,6 +7,33 @@
       <%# <%= render "kanban", project: @project %>
     </div>
     <div class = "container">
+      <div class ="wrapper w-100" >
+        <div class = "container p-5 ">
+          <div class = "card">
+            <h1>Search</h1>
+            <br>
+            <div class = "container">
+              <%= search_form_for [@q] do |f| %>
+                <%= f.label :title_cont %>
+                <%= f.search_field :title_cont %>
+                <%= f.label :description_cont %>
+                <%= f.search_field :description_cont %>
+                <%= f.submit %>
+              <% end %>
+            </div>
+            <div class="  container">
+              <br>
+              <h2>Search Results:</h2>
+              <% @search.each do |wiki| %>
+                <li>
+                  <%= wiki.title %>
+                  <%= link_to " | Edit", edit_wiki_path(wiki) %>
+                </li>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      </div>
       <h4>Welcome to the Company Wiki Database</h4>
       <%= link_to " Add a new wiki", new_wiki_path() %>
       <div class = "wiki-grid container">
