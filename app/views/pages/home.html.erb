@@ -1,46 +1,47 @@
- <%# Checks if user is signed in %>
+ <% # Checks if user is signed in %>
 <% if user_signed_in? %>
   <div class="container-fluid d-flex mt-3">
     <div class="sidebar col-3">
       <h4>Projects</h4>
       <%= render "shared/projects_sidebar", project: @projects %>
-      <%# <%= render "kanban", project: @project %>
+      <% # <%= render "kanban", project: @project %>
     </div>
     <div class = "dashboard container h-100">
       <div class = "graph card">
-        <h4>Tasks</h4>
+        <h4>All Task Statuses</h4>
         <%= pie_chart @tasks.group(:status).count %>
       </div>
       <div class = "graph card">
+        <h4>All Projects Progress %</h4>
         <%= bar_chart @projects.group(:name).sum(:progress) %>
       </div>
       <div class = "deadlines card">
         <h4>Deadlines</h4>
         <div class = "deadlines-projects">
           <h5>Projects</h5>
-          <% @projects.each do |project|%>
+          <% @projects.each do |project| %>
             <%= project.name %>
           <% end %>
         </div>
         <div class = "deadlines-projects">
           <h5>Start Date</h5>
-          <% @projects.each do |project|%>
+          <% @projects.each do |project| %>
             <% if project.start_date %>
-              <%= project.start_date.strftime("%d %B")%>
+              <%= project.start_date.strftime("%d %B") %>
             <% end %>
           <% end %>
         </div>
         <div class = "deadlines-projects">
           <h5>Deadlines</h5>
-          <% @projects.each do |project|%>
+          <% @projects.each do |project| %>
             <% if project.end_date %>
-              <%= project.end_date.strftime("%d %B")%>
+              <%= project.end_date.strftime("%d %B") %>
             <% end %>
           <% end %>
         </div>
       </div>
       <div class = "members card">
-        <% @projects.each do |project|%>
+        <% @projects.each do |project| %>
           <div>
             <li>
               <%= project.name %>
@@ -54,6 +55,7 @@
         </div>
         <div class ="notifications container col-3">
           <h4>Notifications</h4>
+          <%= render @notifications.order(id: :desc) %>
         </div>
       </div>
     <% end %>

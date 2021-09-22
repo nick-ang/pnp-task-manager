@@ -65,3 +65,6 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 gem "chartkick"
 gem "rails_admin", "~> 2.0"
+gem "ransack", github: "activerecord-hackery/ransack"
+
+gem "noticed", "~> 1.4"

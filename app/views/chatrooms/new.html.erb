@@ -1,0 +1,8 @@
+
+<div class = "test">
+<%= simple_form_for (@chatroom) do |f| %>
+  <%= f.input :name %>
+  <%= f.association :users, label_method: :first_name %>
+  <%= f.submit %>
+<% end %>
+</div>

@@ -2,6 +2,8 @@ class WikisController < ApplicationController
   def index
     @wikis = Wiki.all
     @projects = Project.all
+    @q = Wiki.ransack(params[:q])
+    @search = @q.result(distinct: true)
   end
 
   def new

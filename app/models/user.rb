@@ -9,5 +9,6 @@ class User < ApplicationRecord
   has_many :projects, through: :project_assigns
   has_many :tasks, through: :projects
   has_many :notes
+  has_many :notifications, as: :recipient, dependent: :destroy
   # has_and_belongs_to_many :projects
 end
