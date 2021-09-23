@@ -57,8 +57,12 @@
           <h4>Notifications</h4>
           <% if @notifications %>
             <% @notifications.order(id: :desc).each do |notification| %>
-              <%   @chatroom = Chatroom.find(notification.params[:message].chatroom_id)%>
+              <%  if Chatroom.find(notification.params[:message].chatroom_id)%>
+                <% @chatroom = Chatroom.find(notification.params[:message].chatroom_id) %>
+              <% end %>
               <%= "'#{notification.params[:message].created_at.strftime("%a %b %e")} You received a new message from chatroom: #{@chatroom.name} - #{notification.params[:message].content}'" %>
+              <br>
+              <br>
             <% end %>
           <% end %>
         </div>
