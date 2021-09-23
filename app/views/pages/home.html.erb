@@ -55,7 +55,7 @@
         </div>
         <div class ="notifications container col-3">
           <h4>Notifications</h4>
-          <% if @notifications %>
+          <% if @notifications.params[:message] %>
             <% @notifications.order(id: :desc).each do |notification| %>
               <%  if Chatroom.find(notification.params[:message].chatroom_id)%>
                 <% @chatroom = Chatroom.find(notification.params[:message].chatroom_id) %>
