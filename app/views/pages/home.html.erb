@@ -56,7 +56,6 @@
         <div class ="notifications container col-3">
           <h4>Notifications</h4>
           <% if @notifications %>
-            <%= Notification.first.to_notification.params %>
             <%= @notifications.order(id: :desc) %>
           <% end %>
         </div>
