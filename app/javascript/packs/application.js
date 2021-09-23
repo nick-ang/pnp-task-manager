@@ -22,11 +22,20 @@ ActiveStorage.start()
 import "bootstrap";
 import "bootstrap-icons/font/bootstrap-icons.css";
 import "chartkick/chart.js";
+require("turbolinks").start();
+require("@rails/activestorage").start();
+require("channels");
+import { initKanbanSortable } from "../plugins/initSortable";
 
 // Internal imports, e.g:
 // import { initSelect2 } from '../components/init_select2';
 
-document.addEventListener('turbolinks:load', () => {
+
+document.addEventListener("turbolinks:load", () => {
   // Call your functions here, e.g:
   // initSelect2();
+  const kanbanUls = document.querySelectorAll(".kanban-col");
+  if (kanbanUls) {
+    initKanbanSortable(kanbanUls);
+  }
 });
