@@ -2,9 +2,11 @@ Rails.application.routes.draw do
   mount RailsAdmin::Engine => "/admin", as: "rails_admin"
   devise_for :users
   resources :users
+  patch "/kanbans/:id/sort", to: "kanbans#sort", as: "kanban_sort"
   resources :projects do
     resources :tasks, only: [:new, :create, :show]
     resources :project_assigns
+    resources :kanbans
   end
   resources :tasks, only: [:edit, :update, :destroy, :index]
   resources :wikis

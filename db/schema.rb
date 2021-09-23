@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_09_22_071914) do
+ActiveRecord::Schema.define(version: 2021_09_23_150455) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -28,6 +28,24 @@ ActiveRecord::Schema.define(version: 2021_09_22_071914) do
     t.string "name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "kanban_columns", force: :cascade do |t|
+    t.string "name"
+    t.bigint "kanban_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["kanban_id"], name: "index_kanban_columns_on_kanban_id"
+  end
+
+  create_table "kanbans", force: :cascade do |t|
+    t.string "name"
+    t.string "description"
+    t.jsonb "cards"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.bigint "project_id"
+    t.index ["project_id"], name: "index_kanbans_on_project_id"
   end
 
   create_table "messages", force: :cascade do |t|
@@ -96,18 +114,19 @@ ActiveRecord::Schema.define(version: 2021_09_22_071914) do
   end
 
   create_table "tasks", force: :cascade do |t|
-    t.bigint "project_id", null: false
     t.string "name"
     t.text "description"
     t.datetime "due_date"
     t.integer "status"
     t.datetime "date_created"
     t.datetime "date_modified"
+    t.integer "position"
+    t.bigint "kanban_column_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "created_by"
     t.integer "priority"
-    t.index ["project_id"], name: "index_tasks_on_project_id"
+    t.index ["kanban_column_id"], name: "index_tasks_on_kanban_column_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -142,6 +161,8 @@ ActiveRecord::Schema.define(version: 2021_09_22_071914) do
 
   add_foreign_key "chatroom_assigns", "chatrooms"
   add_foreign_key "chatroom_assigns", "users"
+  add_foreign_key "kanban_columns", "kanbans"
+  add_foreign_key "kanbans", "projects"
   add_foreign_key "messages", "chatrooms"
   add_foreign_key "messages", "users"
   add_foreign_key "notes", "users"
@@ -149,6 +170,6 @@ ActiveRecord::Schema.define(version: 2021_09_22_071914) do
   add_foreign_key "project_assigns", "users"
   add_foreign_key "task_assigns", "tasks"
   add_foreign_key "task_assigns", "users"
-  add_foreign_key "tasks", "projects"
+  add_foreign_key "tasks", "kanban_columns"
   add_foreign_key "wikis", "users"
 end

@@ -17,9 +17,19 @@ class TasksController < ApplicationController
   def create
     @project = Project.find(params[:project_id])
     @task = Task.new(task_params)
-    @task.project = @project
+    @kanban = Kanban.where(:project_id => params[:project_id])
+    @kanban_columns = KanbanColumn.where(:kanban_id => @kanban.first.id)
+    if @task.status == "not_started"
+      @task.kanban_column = @kanban_columns[0]
+    elsif @task.status == "in_progress"
+      @task.kanban_column = @kanban_columns[1]
+    elsif @task.status == "completed"
+      @task.kanban_column = @kanban_columns[2]
+    else
+      @task.kanban_column = nil
+    end
     if @task.save
-      redirect_to root_path
+      redirect_to @project
     else
       render :new
     end
