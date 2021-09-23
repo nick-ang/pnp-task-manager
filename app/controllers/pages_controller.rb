@@ -2,6 +2,7 @@ class PagesController < ApplicationController
   # skip_before_action :authenticate_user!, only: [ :home ]
 
   def home
+    @notification = Notification.new
     if Chatroom.all.count > 0
       @chatroom = Chatroom.new
       @message = Message.new
