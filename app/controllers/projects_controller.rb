@@ -44,7 +44,7 @@ class ProjectsController < ApplicationController
     )
 
     if @project.save
-      redirect_to root_path
+      redirect_to @project
     else
       render :new
     end
@@ -57,7 +57,7 @@ class ProjectsController < ApplicationController
   def update
     @project = Project.find(params[:id])
     @project.update(project_params)
-    redirect_to root_path
+    redirect_to @project
   end
 
   def destroy
