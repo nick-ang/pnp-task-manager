@@ -1,4 +1,4 @@
-<%= simple_form_for [@project, @task], url: project_tasks_url, method: :post do |f| %>
+<%= simple_form_for [@project, @task], url: project_tasks_url(), method: :post do |f| %>
   <%= f.input :name %>
   <%= f.input :description %>
   <%= f.input :due_date %>
