@@ -55,7 +55,8 @@
         </div>
         <div class ="notifications container col-3">
           <h4>Notifications</h4>
-          <%= render @notifications.order(id: :desc) %>
+          <%= Notification.first.to_notification.params %>
+          <%= @notifications.order(id: :desc) %>
         </div>
       </div>
     <% end %>
