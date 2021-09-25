@@ -43,6 +43,10 @@ li {
   padding: 5px;
 }
 
+// Setup minium height of the viewport - navbar
+.min-height-viewport {
+  min-height: calc(100vh - 56px) !important;
+}
 
 // // .tasks-card {
 // //   background-color: aliceblue;
@@ -66,7 +70,7 @@ li {
 //   color: white;
 // }
 
-.kanban {
+/* .kanban {
   display: flex;
   margin: 24px;
 }
@@ -87,7 +91,7 @@ li {
   margin-bottom: 4px;
   padding: 16px;
   cursor: grab;
-}
+} */
 .kanban-col-item:active {
   cursor: grabbing;
 }

@@ -4,13 +4,68 @@
     <%= f.submit "Saved changes" %>
   <% end %>
 <% end %>
-<div class="kanban" data-id="<%= @kanban.first.id %>">
+<div class="row kanban" data-id="<%= @kanban.first.id %>">
   <% @kanban.first.kanban_columns.each do |column| %>
-    <ul class="kanban-col" data-col-id=<%= column.id %> >
-      <li class="kanban-col-name"><%= column.name %></li>
+    <ul class="kanban-col col" data-col-id=<%= column.id %> >
+      <li class="kanban-col-name">
+        <div class="d-flex align-items-center border-bottom border-dark my-3">
+          <i class="bi bi-square" style="font-size: 1.5rem;"></i>
+          <h3 class="mb-0 ml-2"><%= column.name.titleize %></h3>
+        </div>
+      </li>
+      
       <% column.tasks.sort_by{ |task| task.position || 0}.each do |item| %>
         <li class="kanban-col-item" data-item-id=<%= item.id %> >
-          <%= item.name %>
+          <div class="card border border-secondary bg-white rounded-lg px-2 py-3">
+            <div class="task card-body p-0 py-1">
+              <div class="d-flex">
+                <h4 class="card-title flex-grow-1 mb-0">
+                  <%= item.name %>
+                  
+                  <% if item.priority == "high" %>
+                    <span class="badge badge-danger ml-1"><%= "#{item.priority.titleize}" %></span>
+                  <% elsif item.priority == "medium" %>
+                    <span class="badge badge-warning ml-1"><%= "#{item.priority.titleize}" %></span>
+                  <% elsif item.priority == "low" %>
+                    <span class="badge badge-info ml-1"><%= "#{item.priority.titleize}" %></span>
+                  <% else %>
+
+                  <% end %>
+                </h4>
+
+                <%= link_to edit_task_path(item), class: "mr-2 stretched-link" do %>
+                  <i class="bi bi-pencil" style="font-size: 1.25rem;"></i>
+                <% end %>
+  
+                <%= link_to task_path(item),
+                  method: :delete,
+                  data: { confirm: "Are you sure?" } do %>
+                    <i class="bi bi-trash" style="font-size: 1.25rem;"></i>
+                <% end %>
+              </div>
+
+              <% "User IDS Assigned: #{array = item.users.each} " %>
+              <% array.map do |id|
+                id.first_name
+              end %>
+              <p class="card-text mb-3">Assigned Users: 
+                <% array.each do |user| %>
+                  <%= "#{user.first_name} | " %>
+                <% end %>
+              </p>
+  
+              <p class="card-text"><%= "Description: #{item.description}" %></p>
+  
+              <p class="card-text"><%= "Due Date: #{item.due_date.strftime("%d %B %Y")}" %></p>
+            </div>
+          </div>
+
+          <div class="card border border-secondary bg-white text-center rounded-lg">
+            <div class="card-body p-0 py-1">
+              <i class="bi bi-plus" style="font-size: 1.75rem;"></i>
+              <h5 class="card-title mb-0 mt-n2"><%= link_to "Add New Task", new_project_task_path(1), class: "nav-link stretched-link pt-0" %></h5>
+            </div>
+          </div>
         </li>
       <% end %>
     </ul>

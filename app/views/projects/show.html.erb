@@ -1,29 +1,25 @@
- <%# Checks if user is signed in %>
+<%# Checks if user is signed in %>
 <% if user_signed_in? %>
-  <div class="container-fluid d-flex mt-3">
-    <div class="sidebar col-3">
-      <h4>Projects</h4>
-      <%= render "shared/projects_sidebar", project: @projects %>
-      <%# <%= render "kanban", project: @project %>
-    </div>
-    <div id = "project-container" class = "project">
-      <nav class="nav flex-column">
+  <div class="container-fluid">
+    <div class="row min-height-viewport">
+      <div class="sidebar col-3 pt-3" style="background-color: #8faac8;">
+        <h3 class="text-white font-weight-bold">Projects</h3>
+        <%= render "shared/projects_sidebar", project: @projects %>
+      </div>
+
+      <div id="project-container" class="col-9 bg-white">
         <%# Show all projects %>
         <%  project = @project %>
         <% if project.user_ids.include?(current_user.id) || current_user.id == project.created_by || current_user.admin%>
-          <br>
-          <br>
           <%# Get project details %>
           <%= render "pages/todo", project: project, task: @tasks%>
-        </nav>
-        <br>
-        <br>
-        <div id = "task-container" class = "fluid-container">
-        </div>
+        <% end %>
       </div>
-      <div class = "container col-3 p-3">
-        <%= render "pages/project_container", project: project, task: @tasks%>
+
+        <!--<div class="container col-3 p-3">
+          <%= render "pages/project_container", project: project, task: @tasks%>
+        </div>-->
       </div>
     </div>
-  <% end %>
+  </div>
 <% end %>
