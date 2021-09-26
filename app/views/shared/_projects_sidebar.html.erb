@@ -1,7 +1,7 @@
 <nav class="nav flex-column">
   <!-- Get Projects -->
   <% @projects.each do |project| %>
-    <% if project.user_ids.include?(current_user.id) || current_user.id == project.created_by || current_user.admin%>
+    <% if project.user_ids.include?(current_user.id) || current_user.id == project.created_by || current_user.admin %>
       <div class="card border border-secondary bg-white rounded-lg mb-3 px-2 py-3">
         <div class="card-body p-0 py-1">
           <div class="d-flex">
@@ -29,14 +29,19 @@
           </div>
           
           <div class="row">
-            <div class="col">
-              <p class="mb-0 small">Start Date</p>
-              <p class="mb-0"><%= project.start_date %></p>
-            </div>
-            <div class="col">
-              <p class="mb-0 small">Due Date</p>
-              <p class="mb-0"><%= project.end_date %></p>
-            </div>
+            <% if project.start_date %>
+              <div class="col">
+                <p class="mb-0 small">Start Date</p>
+                <p class="mb-0"><%= project.start_date.strftime("%d %B %Y") %></p>
+              </div>
+            <% end %>
+
+            <% if project.end_date %>
+              <div class="col">
+                <p class="mb-0 small">Due Date</p>
+                <p class="mb-0"><%= project.end_date.strftime("%d %B %Y") %></p>
+              </div>
+            <% end %>
           </div>
         </div>
       </div>
