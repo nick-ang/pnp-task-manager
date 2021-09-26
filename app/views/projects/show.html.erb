@@ -2,23 +2,17 @@
 <% if user_signed_in? %>
   <div class="container-fluid">
     <div class="row min-height-viewport">
-      <div class="sidebar col-3 pt-3" style="background-color: #8faac8;">
-        <h3 class="text-white font-weight-bold">Projects</h3>
+      <div class="sidebar col-md-3 pt-3 pnp_bg_blue">
         <%= render "shared/projects_sidebar", project: @projects %>
       </div>
 
-      <div id="project-container" class="col-9 bg-white">
+      <div id="project-container" class="col-md-9 bg-white">
         <%# Show all projects %>
         <%  project = @project %>
         <% if project.user_ids.include?(current_user.id) || current_user.id == project.created_by || current_user.admin%>
           <%# Get project details %>
           <%= render "pages/todo", project: project, task: @tasks%>
         <% end %>
-      </div>
-
-        <!--<div class="container col-3 p-3">
-          <%= render "pages/project_container", project: project, task: @tasks%>
-        </div>-->
       </div>
     </div>
   </div>
