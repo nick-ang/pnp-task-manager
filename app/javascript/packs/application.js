@@ -39,3 +39,7 @@ document.addEventListener("turbolinks:load", () => {
     initKanbanSortable(kanbanUls);
   }
 });
+
+$(function () {
+  $('[data-toggle="tooltip"]').tooltip()
+})

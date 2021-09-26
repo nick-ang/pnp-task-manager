@@ -6,7 +6,7 @@
 <% end %>
 <div class="row kanban" data-id="<%= @kanban.first.id %>">
   <% @kanban.first.kanban_columns.each do |column| %>
-    <ul class="kanban-col col" data-col-id=<%= column.id %> >
+    <ul class="kanban-col col-md-4" data-col-id=<%= column.id %> >
       <li class="kanban-col-name">
         <div class="d-flex align-items-center border-bottom border-dark my-3">
           <i class="bi bi-square" style="font-size: 1.5rem;"></i>
@@ -17,7 +17,7 @@
         <li class="kanban-col-item" data-item-id=<%= item.id %> >
           <div class="card border border-secondary bg-white rounded-lg px-2 py-2">
             <div class="task card-body p-0 py-1">
-              <div class="d-flex">
+              <div class="d-flex align-items-center">
                 <h5 class="card-title flex-grow-1 mb-0">
                   <%= item.name %>
                   <% if item.priority == "high" %>
@@ -29,17 +29,20 @@
                   <% end %>
 
                   <% if item.due_date %>
-                    <% if Date.parse(item.due_date.strftime("%d %B %Y")) < Date.today %>
-                      <span class="badge badge-danger ml-1">Due</span>
+                    <% if Date.parse(item.due_date.strftime("%d %B %Y")) < Date.today && column.name != "completed" %>
+                      <span class="badge badge-pill badge-danger ml-1">Due</span>
                     <% end %>
                   <% end %>
                 </h5>
-                <%= link_to edit_task_path(item), class: "mr-2" do %>
+                <%= link_to edit_task_path(item), class: "mr-2", 'data-toggle' => "tooltip", 'data-placement' => "top", title: "Edit Task" do %>
                   <i class="bi bi-pencil" style="font-size: 1.15rem;"></i>
                 <% end %>
                 <%= link_to task_path(item),
                   method: :delete,
-                  data: { confirm: "Are you sure?" } do %>
+                  data: { confirm: "Are you sure?" },
+                  'data-toggle' => "tooltip",
+                  'data-placement' => "top",
+                  title: "Delete Task" do %>
                   <i class="bi bi-trash" style="font-size: 1.15rem;"></i>
                 <% end %>
               </div>
@@ -48,19 +51,17 @@
                 id.first_name
               end %>
               <p class="card-text mb-2 small">Assigned Users:
-                <% if item.users.count > 1 %>
-                  <% array.each do |user| %>
-                    <%= "#{user.first_name} | " %>
-                  <% end %>
-                <% else %>
-                  <% array.each do |user| %>
-                    <%= "#{user.first_name}" %>
+                <% array.each do |user| %>
+                  <%= "#{user.first_name}" %>
+                  
+                  <% if user != item.users.last %>
+                    <%= " | " %>
                   <% end %>
                 <% end %>
               </p>
               
               <% if item.due_date %>
-                <% if Date.parse(item.due_date.strftime("%d %B %Y")) < Date.today %>
+                <% if Date.parse(item.due_date.strftime("%d %B %Y")) < Date.today && column.name != "completed" %>
                   <p class="card-text text-danger font-weight-bold">
                 <% else %>
                   <p class="card-text">

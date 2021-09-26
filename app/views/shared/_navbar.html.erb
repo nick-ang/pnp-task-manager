@@ -1,7 +1,7 @@
-<div class="navbar navbar-expand-sm navbar-light navbar">
+<div id="pnp-navbar" class="navbar navbar-expand-sm navbar-light navbar">
   <% if user_signed_in? %>
     <%= link_to "#", class: "navbar-brand" do %>
-      <a  href="<%= root_path %>">P&NP | HOME</a>
+      <a class="pnp_logo_blue" href="<%= root_path %>"></a>
       <a  href="<%= wikis_path %>">Wikis</a>
       <a  href="<%= chatrooms_path %>">Chatrooms</a>
       <a  href="<%= notes_path %>">Sticky Notes</a>
