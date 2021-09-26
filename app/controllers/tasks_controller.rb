@@ -40,15 +40,17 @@ class TasksController < ApplicationController
   end
 
   def update
+    @project = Project.find(params[:project_id])
     @task = Task.find(params[:id])
     @task.update(task_params)
-    redirect_to root_path
+    redirect_to @project
   end
 
   def destroy
+    @project = Project.find(params[:project_id])
     @task = Task.find(params[:id])
     @task.destroy
-    redirect_to root_path
+    redirect_to @project
   end
 
   private
