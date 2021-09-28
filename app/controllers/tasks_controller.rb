@@ -41,16 +41,20 @@ class TasksController < ApplicationController
   end
 
   def update
-    @project = Project.find(params[:project_id])
     @task = Task.find(params[:id])
     @task.update(task_params)
+    @kanban_column = @task.kanban_column
+    @kanban = @kanban_column.kanban
+    @project = @kanban.project
     redirect_to @project
   end
 
   def destroy
-    @project = Project.find(params[:project_id])
     @task = Task.find(params[:id])
     @task.destroy
+    @kanban_column = @task.kanban_column
+    @kanban = @kanban_column.kanban
+    @project = @kanban.project
     redirect_to @project
   end
 

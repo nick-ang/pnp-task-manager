@@ -27,7 +27,6 @@
                   <% elsif item.priority == "low" %>
                     <span class="badge badge-info ml-1">L</span>
                   <% end %>
-
                   <% if item.due_date %>
                     <% if Date.parse(item.due_date.strftime("%d %B %Y")) < Date.today && column.name != "completed" %>
                       <span class="badge badge-pill badge-danger ml-1">Due</span>
@@ -53,26 +52,23 @@
               <p class="card-text mb-2 small">Assigned Users:
                 <% array.each do |user| %>
                   <%= "#{user.first_name}" %>
-                  
                   <% if user != item.users.last %>
                     <%= " | " %>
                   <% end %>
                 <% end %>
               </p>
-              
               <% if item.due_date %>
                 <% if Date.parse(item.due_date.strftime("%d %B %Y")) < Date.today && column.name != "completed" %>
                   <p class="card-text text-danger font-weight-bold">
-                <% else %>
-                  <p class="card-text">
+                  <% else %>
+                    <p class="card-text">
+                    <% end %>
+                    <%= "Due: #{item.due_date.strftime("%d %B %Y")}" %></p>
                 <% end %>
-
-                <%= "Due: #{item.due_date.strftime("%d %B %Y")}" %></p>
-              <% end %>
+              </div>
             </div>
-          </div>
-        </li>
-      <% end %>
-    </ul>
-  <% end %>
-</div>
+          </li>
+        <% end %>
+      </ul>
+    <% end %>
+  </div>

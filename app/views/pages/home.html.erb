@@ -71,8 +71,6 @@
           <% end %>
         </div>
       </div>
-    </div>
-  </div>
-<% else %>
-  <%#render new_user_session_path %>
-<% end %>
+    <% else %>
+      <% new_user_session_path %>
+    <% end %>
