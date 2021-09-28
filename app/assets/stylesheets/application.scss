@@ -65,9 +65,18 @@ li {
   padding: 5px;
 }
 
-// Setup minium height of the viewport - navbar
+// Minimum height of the viewport - navbar
 .min-height-viewport {
   min-height: calc(100vh - 56px) !important;
+}
+
+// Maximum height of the viewport - navbar
+.max-height-viewport {
+  max-height: calc(100vh - 56px) !important;
+}
+
+.overflow-y-scroll {
+  overflow-y: scroll;
 }
 
 // // .tasks-card {
