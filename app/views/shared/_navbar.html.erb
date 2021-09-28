@@ -1,7 +1,7 @@
 <div id="pnp-navbar" class="navbar navbar-expand-sm navbar-light navbar">
   <% if user_signed_in? %>
     <%= link_to "#", class: "navbar-brand" do %>
-      <a class="pnp_logo_blue" href="<%= root_path %>"></a>
+      <a class="pnp_logo_blue pnp_logo_blue_60px" href="<%= root_path %>"></a>
       <a  href="<%= wikis_path %>">Wikis</a>
       <a  href="<%= chatrooms_path %>">Chatrooms</a>
       <a  href="<%= notes_path %>">Sticky Notes</a>
@@ -17,7 +17,7 @@
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
       <% if user_signed_in? %>
-        <p id="screen-name">Hi, <%= current_user.first_name.capitalize %> | <%= current_user.position %> | <%= "Employee ID: #{current_user.id}" %>
+        <p id="screen-name">G'day, <%= current_user.first_name.capitalize %> | <%= current_user.position.titleize %> | <%= "Employee ID: #{current_user.id}" %>
           <li class="nav-item dropdown">
             <%= image_tag "https://source.unsplash.com/random", class: "avatar dropdown-toggle rounded-circle", id: "navbarDropdown", data: { toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false %>
             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">

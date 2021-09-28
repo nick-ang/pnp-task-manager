@@ -1,59 +1,63 @@
- <% # Checks if user is signed in %>
+<% # Checks if user is signed in %>
 <% if user_signed_in? %>
-  <div class="container-fluid d-flex mt-3">
-    <div class="sidebar col-3">
-      <h4>Projects</h4>
-      <%= render "shared/projects_sidebar", project: @projects %>
-      <% # <%= render "kanban", project: @project %>
-    </div>
-    <div class = "dashboard container h-100">
-      <div class = "graph card">
-        <h4>All Task Statuses</h4>
-        <%= pie_chart @tasks.group(:status).count %>
+  <div class="container-fluid mt-3 min-height-viewport">
+    <div class="row">
+      <div class="col-md-3 pt-3 pnp_bg_blue">
+        <%= render "shared/projects_sidebar", project: @projects %>
+        <% # <%= render "kanban", project: @project %>
       </div>
-      <div class = "graph card">
-        <h4>All Projects Progress %</h4>
-        <%= bar_chart @projects.group(:name).sum(:progress) %>
-      </div>
-      <div class = "deadlines card">
-        <h4>Deadlines</h4>
-        <div class = "deadlines-projects">
-          <h5>Projects</h5>
-          <% @projects.each do |project| %>
-            <%= project.name %>
-          <% end %>
+
+      <div class = "dashboard container h-100">
+        <div class = "graph card">
+          <h4>All Task Statuses</h4>
+          <%= pie_chart @tasks.group(:status).count %>
         </div>
-        <div class = "deadlines-projects">
-          <h5>Start Date</h5>
-          <% @projects.each do |project| %>
-            <% if project.start_date %>
-              <%= project.start_date.strftime("%d %B") %>
-            <% end %>
-          <% end %>
+        <div class = "graph card">
+          <h4>All Projects Progress %</h4>
+          <%= bar_chart @projects.group(:name).sum(:progress) %>
         </div>
-        <div class = "deadlines-projects">
-          <h5>Deadlines</h5>
-          <% @projects.each do |project| %>
-            <% if project.end_date %>
-              <%= project.end_date.strftime("%d %B") %>
-            <% end %>
-          <% end %>
-        </div>
-      </div>
-      <div class = "members card">
-        <% @projects.each do |project| %>
-          <div>
-            <li>
+        <div class = "deadlines card">
+          <h4>Deadlines</h4>
+          <div class = "deadlines-projects">
+            <h5>Projects</h5>
+            <% @projects.each do |project| %>
               <%= project.name %>
-              <img src="" alt="">
-              <% "No. of members: #{array_project = project.users.each} " %>
-              <%= "No. of members #{array_project.size}" %>
-              <li>
-              </div>
+            <% end %>
+          </div>
+          <div class = "deadlines-projects">
+            <h5>Start Date</h5>
+            <% @projects.each do |project| %>
+              <% if project.start_date %>
+                <%= project.start_date.strftime("%d %B") %>
+              <% end %>
+            <% end %>
+          </div>
+          <div class = "deadlines-projects">
+            <h5>Deadlines</h5>
+            <% @projects.each do |project| %>
+              <% if project.end_date %>
+                <%= project.end_date.strftime("%d %B") %>
+              <% end %>
             <% end %>
           </div>
         </div>
-        <div class ="notifications container col-3">
+        <div class = "members card">
+          <% @projects.each do |project| %>
+            <div>
+              <li>
+                <%= project.name %>
+                <img src="" alt="">
+                <% "No. of members: #{array_project = project.users.each} " %>
+                <%= "No. of members #{array_project.size}" %>
+                <li>
+                </div>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class ="notifications container col-3">
           <h4>Notifications</h4>
           <% if @notifications %>
             <% @notifications.order(id: :desc).each do |notification| %>
@@ -67,4 +71,8 @@
           <% end %>
         </div>
       </div>
-    <% end %>
+    </div>
+  </div>
+<% else %>
+  <%#render new_user_session_path %>
+<% end %>
