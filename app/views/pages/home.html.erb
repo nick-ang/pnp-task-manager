@@ -1,76 +1,91 @@
 <% # Checks if user is signed in %>
 <% if user_signed_in? %>
-  <div class="container-fluid mt-3 min-height-viewport">
-    <div class="row">
-      <div class="col-md-3 pt-3 pnp_bg_blue">
+  <div class="container-fluid">
+    <div class="row min-height-viewport">
+      <div class="col-md-3 pt-3 pnp_bg_blue max-height-viewport overflow-y-scroll">
         <%= render "shared/projects_sidebar", project: @projects %>
-        <% # <%= render "kanban", project: @project %>
       </div>
 
-      <div class = "dashboard container h-100">
-        <div class = "graph card">
-          <h4>All Task Statuses</h4>
-          <%= pie_chart @tasks.group(:status).count %>
-        </div>
-        <div class = "graph card">
-          <h4>All Projects Progress %</h4>
+      <div class="dashboard col-md-7 pt-3 max-height-viewport overflow-y-scroll">
+        <div class="container bg-white border-0 rounded-lg">
+          <h5 class="mt-2">All Projects Progress %</h5>
           <%= bar_chart @projects.group(:name).sum(:progress) %>
         </div>
-        <div class = "deadlines card">
-          <h4>Deadlines</h4>
-          <div class = "deadlines-projects">
-            <h5>Projects</h5>
-            <% @projects.each do |project| %>
-              <%= project.name %>
-            <% end %>
-          </div>
-          <div class = "deadlines-projects">
-            <h5>Start Date</h5>
-            <% @projects.each do |project| %>
-              <% if project.start_date %>
-                <%= project.start_date.strftime("%d %B") %>
-              <% end %>
-            <% end %>
-          </div>
-          <div class = "deadlines-projects">
-            <h5>Deadlines</h5>
-            <% @projects.each do |project| %>
-              <% if project.end_date %>
-                <%= project.end_date.strftime("%d %B") %>
-              <% end %>
-            <% end %>
-          </div>
-        </div>
-        <div class = "members card">
-          <% @projects.each do |project| %>
-            <div>
-              <li>
-                <%= project.name %>
-                <img src="" alt="">
-                <% "No. of members: #{array_project = project.users.each} " %>
-                <%= "No. of members #{array_project.size}" %>
-                <li>
+
+        <div class="container pb-5">
+          <div class="row mt-2">
+            <div class="col-7 bg-white border-0 rounded-lg">
+              <h5 class="mt-2">All Task Statuses</h5>
+              <%= pie_chart @tasks.group(:status).count %>
+            </div>
+
+            <div class="col-5 pr-0">
+              <div class="container">
+                <div class="row">
+                  <div class="deadlines col-12 bg-white border-0 rounded-lg">
+                    <h5 class="mt-2">Deadlines</h5>
+                    <div class="deadlines-projects">
+                      <h6>Projects</h6>
+                      <% @projects.each do |project| %>
+                        <%= project.name %>
+                      <% end %>
+                    </div>
+
+                    <div class="deadlines-projects">
+                      <h6>Start Date</h6>
+                      <% @projects.each do |project| %>
+                        <% if project.start_date %>
+                          <%= project.start_date.strftime("%d %B") %>
+                        <% end %>
+                      <% end %>
+                    </div>
+
+                    <div class="deadlines-projects">
+                      <h6>Deadlines</h6>
+                      <% @projects.each do |project| %>
+                        <% if project.end_date %>
+                          <%= project.end_date.strftime("%d %B") %>
+                        <% end %>
+                      <% end %>
+                    </div>
+                  </div>
                 </div>
-              <% end %>
+
+                <div class="row mt-2">
+                  <div class="members col-12 bg-white border-0 rounded-lg">
+                    <h5 class="mt-2">Team Members</h5>
+
+                    <% @projects.each do |project| %>
+                      <div>
+                        <li>
+                          <%= project.name %>
+                          <img src="" alt="">
+                          <% "No. of members: #{array_project = project.users.each} " %>
+                          <%= "No. of members #{array_project.size}" %>
+                        <li>
+                      </div>
+                    <% end %>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </div>
 
-      <div class ="notifications container col-3">
-          <h4>Notifications</h4>
-          <% if @notifications %>
-            <% @notifications.order(id: :desc).each do |notification| %>
-              <%  if Chatroom.find(notification.params[:message].chatroom_id)%>
-                <% @chatroom = Chatroom.find(notification.params[:message].chatroom_id) %>
-              <% end %>
-              <%= link_to "'#{notification.params[:message].created_at.strftime("%a %b %e")} You received a new message from chatroom: #{@chatroom.name} - #{notification.params[:message].content}'", chatroom_path(@chatroom) %>
-              <br>
-              <br>
+      <div class="notifications col-md-2 pt-3 bg-white min-height-viewport">
+        <h5>Notifications</h5>
+
+        <% if @notifications %>
+          <% @notifications.order(id: :desc).each do |notification| %>
+            <%  if Chatroom.find(notification.params[:message].chatroom_id)%>
+              <% @chatroom = Chatroom.find(notification.params[:message].chatroom_id) %>
             <% end %>
+            <%= link_to "'#{notification.params[:message].created_at.strftime("%a %b %e")} You received a new message from chatroom: #{@chatroom.name} - #{notification.params[:message].content}'", chatroom_path(@chatroom) %>
           <% end %>
+        <% end %>
         </div>
       </div>
-    <% else %>
-      <% new_user_session_path %>
-    <% end %>
+    </div>
+  </div>
+<% end %>
