@@ -1,4 +1,4 @@
-<%= simple_form_for (@project_new) do |f| %>
+<%= simple_form_for (@project_edit) do |f| %>
     <%= f.input :progress, :as => :hidden, :input_html => { :value => "0" } %>
     <%= f.input :status, :as => :hidden, :input_html => { :value => "not_started" } %>
     <%= f.input :created_by, :as => :hidden, :input_html => { :value => current_user.id } %>
@@ -43,9 +43,18 @@
     </div>
 
   </div>
+  <%= f.input :name %>
+  <%= f.input :progress,
+              required: true,
+              hint: "Enter in %" %>
+  <%= f.input :end_date %>
+  <%= f.input :start_date %>
+  <%= f.association :users, label_method: :first_name %>
+  <%= f.input :status, collection: Project.statuses.keys %>
+  <%= f.input :created_by, :as => :hidden, :input_html => { :value => current_user.id }, label: "Created_by User ID:" %>
 
   <div class="modal-footer">
     <button type="button" class="btn btn-secondary" data-dismiss="modal" aria-label="Close">Cancel</button>
-    <%= f.submit "Add Project", class: "btn btn-primary" %>
+    <%= f.submit "Update Project", class: "btn btn-primary" %>
   </div>
 <% end %>
