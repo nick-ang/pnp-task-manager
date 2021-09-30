@@ -1,4 +1,4 @@
-.navbar {
+/* .navbar {
   justify-content: space-between;
   background: white;
 }
@@ -18,4 +18,17 @@
   margin-right: 20px;
   display: flex;
   align-items: center;
+} */
+
+.container-fluid .row, .navbar-height {
+  height: 56px;
+}
+
+.pnp_navbar_user_image {
+  width: 50px;
+  height: 50px;
+}
+
+.pnp_navbar_dropdown_icon::after {
+  display: none !important;
 }

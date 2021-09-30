@@ -1,35 +1,65 @@
-<div id="pnp-navbar" class="navbar navbar-expand-sm navbar-light navbar">
-  <% if user_signed_in? %>
-    <%= link_to "#", class: "navbar-brand" do %>
-      <a class="pnp_logo_blue pnp_logo_blue_60px" href="<%= root_path %>"></a>
-      <a  href="<%= wikis_path %>">Wikis</a>
-      <a  href="<%= chatrooms_path %>">Chatrooms</a>
-      <a  href="<%= notes_path %>">Sticky Notes</a>
-      <% if current_user.admin %>
-        <a  href="<%= rails_admin_path %>">Admin Dashboard</a>
-      <% end %>
-    <% end %>
-  <% end %>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
+<div id="pnp_navbar" class="bg-white">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-3 pnp_bg_blue text-center">
+        <div class="d-flex justify-content-center align-items-center navbar-height">
+            <a class="pnp_logo_white pnp_logo_white_60px mr-0 navbar-brand" href="<%= root_path %>"></a>
+        </div>
+      </div>
 
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul class="navbar-nav mr-auto">
-      <% if user_signed_in? %>
-        <p id="screen-name">G'day, <%= current_user.first_name.capitalize %> | <%= current_user.position.titleize %> | <%= "Employee ID: #{current_user.id}" %>
-          <li class="nav-item dropdown">
-            <%= image_tag "https://source.unsplash.com/random", class: "avatar dropdown-toggle rounded-circle", id: "navbarDropdown", data: { toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false %>
-            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-              <%= link_to "Another action", "#", class: "dropdown-item" %>
-              <%= link_to "Log Out", destroy_user_session_path, method: :delete, class: "dropdown-item" %>
-            </div>
-          </li>
-        <% else %>
-          <li class="nav-item">
-            <%= link_to "Login", new_user_session_path, class: "nav-link" %>
-          </li>
-        <% end %>
-      </ul>
+      <div class="col-9">
+        <div class="d-flex justify-content-around align-items-center navbar-height">
+          <a class="nav-link" href="<%= root_path %>">Home</a>
+          <a class="nav-link" href="<%= wikis_path %>">Wikis</a>
+          <a class="nav-link" href="<%= chatrooms_path %>">Chatrooms</a>
+          <a class="nav-link" href="<%= notes_path %>">Sticky Notes</a>
+          <% if user_signed_in? && current_user.admin %>
+            <a class="nav-link" href="<%= rails_admin_path %>">Admin Dashboard</a>
+          <% end %>
+
+          <div class="d-inline-flex justify-content-end align-items-center navbar-height">
+            <% if user_signed_in? %>
+              <div class="dropdown">
+                <a class="btn dropdown-toggle pnp_navbar_dropdown_icon" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <i class="bi bi-bell"></i>
+                </a>
+
+                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="notificationDropdownMenuButton">
+                  <% if @notifications %>
+                    <% @notifications.order(id: :desc).each do |notification| %>
+                      <%  if Chatroom.find(notification.params[:message].chatroom_id)%>
+                        <% @chatroom = Chatroom.find(notification.params[:message].chatroom_id) %>
+                      <% end %>
+                      
+                      <%= link_to "'#{notification.params[:message].created_at.strftime("%a %b %e")} You received a new message from chatroom: #{@chatroom.name} - #{notification.params[:message].content}'", chatroom_path(@chatroom) %>
+                    <% end %>
+
+                    <p class="dropdown-header">No new notifications!</p>
+                  <% end %>
+                </div>
+              </div>
+
+              <div class="dropdown">
+                <a class="btn dropdown-toggle pnp_navbar_dropdown_icon" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  G'day, <%= current_user.first_name.capitalize %>
+
+                  <img class="ml-2 pnp_navbar_user_image dropdown-toggle rounded-circle" src="data:image/png;base64,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">
+                </a>
+
+                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdownMenuButton">
+                  <p class="dropdown-header"><%= current_user.position.titleize %></p>
+
+                  <%= link_to "Another action", "#", class: "dropdown-item" %>
+
+                  <div class="dropdown-divider"></div>
+
+                  <%= link_to "Log Out", destroy_user_session_path, method: :delete, class: "dropdown-item" %>
+                </div>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
+</div>
