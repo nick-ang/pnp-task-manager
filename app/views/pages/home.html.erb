@@ -6,7 +6,7 @@
         <%= render "shared/projects_sidebar", project: @projects %>
       </div>
 
-      <div class="dashboard col-md-7 pt-3 max-height-viewport overflow-y-scroll">
+      <div class="dashboard col-md-9 pt-3 max-height-viewport overflow-y-scroll">
         <div class="container bg-white border-0 rounded-lg">
           <h5 class="mt-2">All Projects Progress %</h5>
           <%= bar_chart @projects.group(:name).sum(:progress) %>
@@ -70,20 +70,6 @@
               </div>
             </div>
           </div>
-        </div>
-      </div>
-
-      <div class="notifications col-md-2 pt-3 bg-white min-height-viewport">
-        <h5>Notifications</h5>
-
-        <% if @notifications %>
-          <% @notifications.order(id: :desc).each do |notification| %>
-            <%  if Chatroom.find(notification.params[:message].chatroom_id)%>
-              <% @chatroom = Chatroom.find(notification.params[:message].chatroom_id) %>
-            <% end %>
-            <%= link_to "'#{notification.params[:message].created_at.strftime("%a %b %e")} You received a new message from chatroom: #{@chatroom.name} - #{notification.params[:message].content}'", chatroom_path(@chatroom) %>
-          <% end %>
-        <% end %>
         </div>
       </div>
     </div>
