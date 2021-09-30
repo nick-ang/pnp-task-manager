@@ -2,6 +2,7 @@ class PagesController < ApplicationController
   before_action :authenticate_user!
 
   def home
+    @project = Project.new
     @notification = Notification.new
     if Chatroom.all.count > 0
       @chatroom = Chatroom.new
