@@ -21,36 +21,4 @@ class ApplicationController < ActionController::Base
       @demo = User.first
     end
   end
-
-  def new
-    @project = Project.new
-    @kanban = Kanban.new
-  end
-
-  def create
-    @project = Project.new(project_params)
-    @kanban = Kanban.create(
-      name: @project.name,
-      description: "Kanban for #{@project.name}.",
-      project: @project,
-    )
-    KanbanColumn.create(
-      name: "not_started",
-      kanban: @kanban,
-    )
-    KanbanColumn.create(
-      name: "in_progress",
-      kanban: @kanban,
-    )
-    KanbanColumn.create(
-      name: "completed",
-      kanban: @kanban,
-    )
-
-    if @project.save
-      redirect_to @project
-    else
-      render :new
-    end
-  end
 end

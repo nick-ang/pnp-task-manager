@@ -1,7 +1,8 @@
 class WikisController < ApplicationController
   before_action :authenticate_user!
-  
+
   def index
+    @project_new = Project.new
     @wikis = Wiki.all
     @projects = Project.all
     @q = Wiki.ransack(params[:q])
