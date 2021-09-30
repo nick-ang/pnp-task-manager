@@ -1,7 +1,8 @@
 class NotesController < ApplicationController
   before_action :authenticate_user!
-  
+
   def index
+    @project_new = Project.new
     @notes = current_user.notes
     @projects = Project.all
   end

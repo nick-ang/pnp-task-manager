@@ -1,11 +1,12 @@
 class ChatroomsController < ApplicationController
   before_action :authenticate_user!
-  
+
   def new
     @chatroom = Chatroom.new
   end
 
   def index
+    @project_new = Project.new
     @chatrooms = Chatroom.all
     @projects = Project.all
   end
