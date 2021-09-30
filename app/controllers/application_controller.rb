@@ -15,8 +15,8 @@ class ApplicationController < ActionController::Base
   end
 
   def demo_user
-    if User.all.length > 4
-      @demo = User.find(4)
+    if User.all.length > 6
+      @demo = User.find(6)
     else
       @demo = User.first
     end
