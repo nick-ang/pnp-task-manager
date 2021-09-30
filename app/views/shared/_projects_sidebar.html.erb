@@ -1,4 +1,4 @@
-<nav class="nav flex-column sticky-top pb-5">
+<div class="nav flex-column sticky-top pb-5">
   <h3 class="text-white font-weight-bold navbar-brand">Projects</h3>
   
   <!-- Get Projects -->
@@ -62,8 +62,12 @@
     <div class="card border border-secondary bg-white text-center rounded-lg">
       <div class="card-body p-0 py-1">
         <i class="bi bi-plus" style="font-size: 1.75rem;"></i>
-        <h5 class="card-title mb-0 mt-n2"><%= link_to "Create New Project", new_project_path(), class: "nav-link stretched-link pt-0" %></h5>
+        <h5 class="card-title mb-0 mt-n2"><%#= link_to "Create New Project", new_project_path(), class: "nav-link stretched-link pt-0" %></h5>
+
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#newProject">
+          Launch demo modal
+        </button>
       </div>
     </div>
   <% end %>
-</nav>
+</div>
