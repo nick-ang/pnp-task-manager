@@ -6,7 +6,8 @@ class ProjectsController < ApplicationController
   end
 
   def show
-    @project = Project.find(params[:id])
+    @project_new = Project.new
+    @project_edit = Project.find(params[:id])
     @projects = Project.all
     @kanbans = current_user.kanbans
     @kanban = Kanban.where(:project_id => params[:id])
@@ -19,16 +20,16 @@ class ProjectsController < ApplicationController
   end
 
   def new
-    @project = Project.new
+    @project_new = Project.new
     @kanban = Kanban.new
   end
 
   def create
-    @project = Project.new(project_params)
+    @project_new = Project.new(project_params)
     @kanban = Kanban.create(
-      name: @project.name,
-      description: "Kanban for #{@project.name}.",
-      project: @project,
+      name: @project_new.name,
+      description: "Kanban for #{@project_new.name}.",
+      project: @project_new,
     )
     KanbanColumn.create(
       name: "not_started",
@@ -43,21 +44,21 @@ class ProjectsController < ApplicationController
       kanban: @kanban,
     )
 
-    if @project.save
-      redirect_to @project
+    if @project_new.save
+      redirect_to @project_new
     else
       render :new
     end
   end
 
   def edit
-    @project = Project.find(params[:id])
+    @project_edit = Project.find(params[:id])
   end
 
   def update
-    @project = Project.find(params[:id])
-    @project.update(project_params)
-    redirect_to @project
+    @project_edit = Project.find(params[:id])
+    @project_edit.update(project_params)
+    redirect_to @project_edit
   end
 
   def destroy
