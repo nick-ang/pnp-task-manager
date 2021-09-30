@@ -1,41 +1,137 @@
-<h2>Sign up</h2>
+<div class="container-fluid pnp_bg_login">
+  <div class="row d-flex justify-content-center align-items-center vh-100">
+    <div class="col-md-8 bg-white shadow">
+      <div class="row">
+        <div class="col-md-3 pnp_bg_blue pr-0">
+          <div class="d-flex flex-column align-items-center h-100">
+            <div class="my-auto ml-auto">
+              <% if request.fullpath.last(7) == "sign_up" %>
+                <%= link_to "Log In", new_session_path(resource_name), class: "btn btn-block text-white" %>
+                <%= link_to "Sign Up", new_registration_path(resource_name), class: "btn btn-block bg-white pnp_login_button_radius" %>
+              <% end %>
+            </div>
+          </div>
+        </div>
 
-<%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-  <%= f.error_notification %>
+        <div class="col-md-9 py-5">
+          <p class="pnp_logo_blue pnp_logo_blue_120px mx-auto"></p>
 
-  <div class="form-inputs">
-    <%= f.input :first_name,
-                required: true,
-                autofocus: true,
-                input_html: { autocomplete: "first-name" } %>
-    <%= f.input :last_name,
-                required: true,
-                input_html: { autocomplete: "last-name" } %>
-    <%= f.input :position,
-                hint: ("Please Select Your Position from the Three Categories"),
-                collection: User.positions.keys %>
-    <%= f.input :phone,
-                required: true,
-                input_html: { autocomplete: "last-name" } %>
-    <%= f.input :gender,
-                hint: ("Please Select Your Gender"),
-                collection: User.genders.keys %>
-    <%= f.input :email,
-                required: true,
-                autofocus: true,
-                input_html: { autocomplete: "email" } %>
-    <%= f.input :password,
-                required: true,
-                hint: ("#{@minimum_password_length} characters minimum" if @minimum_password_length),
-                input_html: { autocomplete: "new-password" } %>
-    <%= f.input :password_confirmation,
-                required: true,
-                input_html: { autocomplete: "new-password" } %>
+          <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+            <div class="form-group row mt-4">
+              <label for="user_first_name" class="col-sm-3 col-form-label">First Name</label>
+
+              <div class="col-sm-9">
+                <%= f.input :first_name,
+                            required: true,
+                            autofocus: true,
+                            label: false,
+                            placeholder: "First Name",
+                            wrapper_html: { class: "mb-0" },
+                            input_html: { autocomplete: "first-name" } %>
+              </div>
+            </div>
+
+            <div class="form-group row mt-4">
+              <label for="user_last_name" class="col-sm-3 col-form-label">Last Name</label>
+
+              <div class="col-sm-9">
+                <%= f.input :last_name,
+                            required: true,
+                            label: false,
+                            placeholder: "Last Name",
+                            wrapper_html: { class: "mb-0" },
+                            input_html: { autocomplete: "last-name" } %>
+              </div>
+            </div>
+
+            <div class="form-group row mt-4">
+              <label for="user_last_name" class="col-sm-3 col-form-label">Email Address</label>
+
+              <div class="col-sm-9">
+                <%= f.input :email,
+                            required: true,
+                            label: false,
+                            placeholder: "Email Address",
+                            wrapper_html: { class: "mb-0" },
+                            input_html: { autocomplete: "email" } %>
+              </div>
+            </div>
+
+            <div class="form-group row mt-4">
+              <label for="user_last_name" class="col-sm-3 col-form-label">Position</label>
+
+              <div class="col-sm-9">
+                <%= f.input :position,
+                            required: true,
+                            label: false,
+                            hint: ("Please Select Your Position from the Three Categories"),
+                            collection: User.positions.keys,
+                            wrapper_html: { class: "mb-0" } %>
+              </div>
+            </div>
+
+            <div class="form-group row mt-4">
+              <label for="user_last_name" class="col-sm-3 col-form-label">Phone</label>
+
+              <div class="col-sm-9">
+                <%= f.input :phone,
+                            required: false,
+                            label: false,
+                            placeholder: "Phone",
+                            wrapper_html: { class: "mb-0" } %>
+              </div>
+            </div>
+
+            <div class="form-group row mt-4">
+              <label for="user_last_name" class="col-sm-3 col-form-label">Gender</label>
+
+              <div class="col-sm-9">
+                <%= f.input :gender,
+                            required: false,
+                            label: false,
+                            hint: ("Please Select Your Gender"),
+                            collection: User.genders.keys,
+                            wrapper_html: { class: "mb-0" } %>
+              </div>
+            </div>
+
+            <div class="form-group row mt-4">
+              <label for="user_last_name" class="col-sm-3 col-form-label">Password</label>
+
+              <div class="col-sm-9">
+                <%= f.input :password,
+                            required: true,
+                            label: false,
+                            placeholder: "Password",
+                            hint: ("#{@minimum_password_length} characters minimum" if @minimum_password_length),
+                            wrapper_html: { class: "mb-0" },
+                            input_html: { autocomplete: "new-password" } %>
+              </div>
+            </div>
+
+            <div class="form-group row mt-4">
+              <label for="user_last_name" class="col-sm-3 col-form-label">Confirm Password</label>
+
+              <div class="col-sm-9">
+                <%= f.input :password_confirmation,
+                            required: true,
+                            label: false,
+                            placeholder: "Confirm Password",
+                            wrapper_html: { class: "mb-0" },
+                            input_html: { autocomplete: "new-password" } %>
+              </div>
+            </div>
+            
+            <div class="form-actions text-center">
+              <%= f.button :submit, "Sign Up", class: "btn btn-primary" %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
   </div>
-
-  <div class="form-actions">
-    <%= f.button :submit, "Sign up" %>
-  </div>
-<% end %>
-
-<%= render "devise/shared/links" %>
+</div>
+<script>
+document.getElementById("pnp_navbar").style.setProperty('display', 'none', 'important');
+document.getElementById("pnp_navbar_responsive").style.setProperty('display', 'none', 'important');
+</script>
