@@ -1,7 +1,6 @@
 <div class="container-fluid pnp_bg_blue">
   <div class="row d-flex align-items-center vh-100">
     <div class="col-md-3"></div>
-
     <div class="col-md-6 bg-white shadow">
       <div class="row">
         <div class="col-md-3 pnp_bg_blue pr-0">
@@ -14,45 +13,38 @@
             </div>
           </div>
         </div>
-
         <div class="col-md-9 py-5 text-center">
           <p class="pnp_logo_blue pnp_logo_blue_120px mx-auto"></p>
-
           <%= simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
             <div class="input-group input-group-lg w-75 mx-auto mt-4">
               <div class="input-group-prepend">
                 <span class="input-group-text border-top-0 border-left-0 border-right-0 bg-transparent"><i class="bi bi-person-fill" style="size: 1rem;"></i></span>
               </div>
-
               <%= f.input :email,
                           required: true,
                           autofocus: true,
-                          input_html: { autocomplete: "email" },
+                          input_html: { value: @demo.email },
                           label: false,
                           placeholder: "Username",
                           wrapper_html: { class: "mb-0" },
                           input_html: { class: "border-top-0 border-left-0 border-right-0 form-control-lg" } %>
             </div>
-
             <div class="input-group input-group-lg w-75 mx-auto mt-4">
               <div class="input-group-prepend">
                 <span class="input-group-text border-top-0 border-left-0 border-right-0 bg-transparent"><i class="bi bi-lock-fill" style="size: 1rem;"></i></span>
               </div>
-
               <%= f.input :password,
                           class: "mb-0",
                           required: true,
-                          input_html: { autocomplete: "current-password" },
+                          input_html: { value: @demo.last_name },
                           label: false,
                           placeholder: "Password",
                           wrapper_html: { class: 'mb-0' },
                           input_html: { class: "border-top-0 border-left-0 border-right-0 form-control-lg" } %>
             </div>
-
             <div class="form-group mt-4">
               <%= f.input :remember_me, as: :boolean if devise_mapping.rememberable? %>
             </div>
-          
             <div class="form-actions text-center">
               <%= f.button :submit, "Get Started", class: "btn btn-primary" %>
             </div>
@@ -60,19 +52,13 @@
         </div>
       </div>
     </div>
-
     <div class="col-md-3"></div>
   </div>
-
-
-
-<!--<p class="pnp_logo_white"></p>
+  <!--<p class="pnp_logo_white"></p>
 
 
 <%= render "devise/shared/links" %>-->
-
 </div>
-
 <script>
-document.getElementById("pnp-navbar").style.display = "none";
+  document.getElementById("pnp-navbar").style.display = "none";
 </script>
