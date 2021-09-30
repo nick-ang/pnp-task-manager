@@ -4,11 +4,10 @@
       <div class="row">
         <div class="col-md-3 pnp_bg_blue pr-0">
           <div class="d-flex flex-column align-items-center h-100">
-            <div class="my-auto ml-auto">
-              <% if request.fullpath.last(7) == "sign_in" %>
-                <%= link_to "Log In", new_session_path(resource_name), class: "btn btn-block bg-white pnp_login_button_radius" %>
-                <%= link_to "Sign Up", new_registration_path(resource_name), class: "btn btn-block text-white" %>
-              <% end %>
+            <div class="my-auto ml-auto pnp_login_register_page">
+              <%= link_to "Log In", new_session_path(resource_name), class: "btn btn-block bg-white pnp_login_button_radius text-right" %>
+              <%= link_to "Sign Up", new_registration_path(resource_name), class: "btn btn-block text-white text-right" %>
+              <%= link_to "Forgot Password?", new_password_path(resource_name), class: "btn btn-block text-white text-right" %>
             </div>
           </div>
         </div>
@@ -17,38 +16,44 @@
           <p class="pnp_logo_blue pnp_logo_blue_120px mx-auto"></p>
 
           <%= simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-            <div class="input-group input-group-lg w-75 mx-auto mt-4">
+            <div class="input-group input-group-lg mx-auto mt-4">
               <div class="input-group-prepend">
-                <span class="input-group-text border-top-0 border-left-0 border-right-0 bg-transparent"><i class="bi bi-person-fill" style="size: 1rem;"></i></span>
+                <span class="input-group-text border-top-0 border-left-0 border-right-0 bg-transparent">
+                  <i class="bi bi-person-fill" style="size: 1rem;"></i>
+                </span>
               </div>
+
               <%= f.input :email,
                           required: true,
                           autofocus: true,
                           label: false,
                           placeholder: "Username",
                           wrapper_html: { class: "mb-0" },
-                          input_html: {value: @demo.email, class: "border-top-0 border-left-0 border-right-0 form-control-lg" } %>
+                          input_html: { class: "border-top-0 border-left-0 border-right-0 form-control-lg" } %>
             </div>
 
-            <div class="input-group input-group-lg w-75 mx-auto mt-4">
+            <div class="input-group input-group-lg mx-auto mt-4">
               <div class="input-group-prepend">
-                <span class="input-group-text border-top-0 border-left-0 border-right-0 bg-transparent"><i class="bi bi-lock-fill" style="size: 1rem;"></i></span>
+                <span class="input-group-text border-top-0 border-left-0 border-right-0 bg-transparent">
+                  <i class="bi bi-lock-fill" style="size: 1rem;"></i>
+                </span>
               </div>
+
               <%= f.input :password,
                           class: "mb-0",
                           required: true,
                           label: false,
                           placeholder: "Password",
                           wrapper_html: { class: 'mb-0' },
-                          input_html: { value: @demo.nickname, class: "border-top-0 border-left-0 border-right-0 form-control-lg" } %>
+                          input_html: { class: "border-top-0 border-left-0 border-right-0 form-control-lg" } %>
             </div>
 
             <div class="form-group mt-4">
               <%= f.input :remember_me, as: :boolean if devise_mapping.rememberable? %>
             </div>
             
-            <div class="form-actions text-center">
-              <%= f.button :submit, "Get Started", class: "btn btn-primary" %>
+            <div class="form-actions text-center mt-4">
+              <%= f.button :submit, "Login", class: "btn btn-primary" %>
             </div>
           <% end %>
         </div>

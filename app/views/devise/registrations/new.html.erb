@@ -4,11 +4,10 @@
       <div class="row">
         <div class="col-md-3 pnp_bg_blue pr-0">
           <div class="d-flex flex-column align-items-center h-100">
-            <div class="my-auto ml-auto">
-              <% if request.fullpath.last(7) == "sign_up" %>
-                <%= link_to "Log In", new_session_path(resource_name), class: "btn btn-block text-white" %>
-                <%= link_to "Sign Up", new_registration_path(resource_name), class: "btn btn-block bg-white pnp_login_button_radius" %>
-              <% end %>
+            <div class="my-auto ml-auto pnp_login_register_page">
+              <%= link_to "Log In", new_session_path(resource_name), class: "btn btn-block text-white text-right" %>
+              <%= link_to "Sign Up", new_registration_path(resource_name), class: "btn btn-block bg-white pnp_login_button_radius text-right" %>
+              <%= link_to "Forgot Password?", new_password_path(resource_name), class: "btn btn-block text-white text-right" %>
             </div>
           </div>
         </div>
@@ -17,10 +16,12 @@
           <p class="pnp_logo_blue pnp_logo_blue_120px mx-auto"></p>
 
           <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-            <div class="form-group row mt-4">
-              <label for="user_first_name" class="col-sm-3 col-form-label">First Name</label>
+            <input type="hidden" name="user[position]" id="user_position" value="employee">
 
-              <div class="col-sm-9">
+            <div class="form-group row mt-4">
+              <label for="user_first_name" class="col-sm-3 col-form-label">First Name*</label>
+
+              <div class="col-sm-9 my-auto">
                 <%= f.input :first_name,
                             required: true,
                             autofocus: true,
@@ -32,9 +33,9 @@
             </div>
 
             <div class="form-group row mt-4">
-              <label for="user_last_name" class="col-sm-3 col-form-label">Last Name</label>
+              <label for="user_last_name" class="col-sm-3 col-form-label">Last Name*</label>
 
-              <div class="col-sm-9">
+              <div class="col-sm-9 my-auto">
                 <%= f.input :last_name,
                             required: true,
                             label: false,
@@ -45,9 +46,9 @@
             </div>
 
             <div class="form-group row mt-4">
-              <label for="user_last_name" class="col-sm-3 col-form-label">Email Address</label>
+              <label for="user_email" class="col-sm-3 col-form-label">Email Address*</label>
 
-              <div class="col-sm-9">
+              <div class="col-sm-9 my-auto">
                 <%= f.input :email,
                             required: true,
                             label: false,
@@ -58,22 +59,9 @@
             </div>
 
             <div class="form-group row mt-4">
-              <label for="user_last_name" class="col-sm-3 col-form-label">Position</label>
+              <label for="user_phone" class="col-sm-3 col-form-label">Phone</label>
 
-              <div class="col-sm-9">
-                <%= f.input :position,
-                            required: true,
-                            label: false,
-                            hint: ("Please Select Your Position from the Three Categories"),
-                            collection: User.positions.keys,
-                            wrapper_html: { class: "mb-0" } %>
-              </div>
-            </div>
-
-            <div class="form-group row mt-4">
-              <label for="user_last_name" class="col-sm-3 col-form-label">Phone</label>
-
-              <div class="col-sm-9">
+              <div class="col-sm-9 my-auto">
                 <%= f.input :phone,
                             required: false,
                             label: false,
@@ -83,22 +71,25 @@
             </div>
 
             <div class="form-group row mt-4">
-              <label for="user_last_name" class="col-sm-3 col-form-label">Gender</label>
+              <label for="user_gender" class="col-sm-3 col-form-label">Gender</label>
 
-              <div class="col-sm-9">
-                <%= f.input :gender,
-                            required: false,
-                            label: false,
-                            hint: ("Please Select Your Gender"),
-                            collection: User.genders.keys,
-                            wrapper_html: { class: "mb-0" } %>
+              <div class="col-sm-9 my-auto">
+                <div class="form-group select optional user_gender mb-0">
+                  <select class="form-control select optional" name="user[gender]" id="user_gender">
+                    <option value="" label=" "></option>
+                    <option value="male">Male</option>
+                    <option value="female">Female</option>
+                  </select>
+                  
+                  <small class="form-text text-muted">Please select your gender</small>
+                </div>
               </div>
             </div>
 
             <div class="form-group row mt-4">
-              <label for="user_last_name" class="col-sm-3 col-form-label">Password</label>
+              <label for="user_password" class="col-sm-3 col-form-label">Password*</label>
 
-              <div class="col-sm-9">
+              <div class="col-sm-9 my-auto">
                 <%= f.input :password,
                             required: true,
                             label: false,
@@ -110,9 +101,9 @@
             </div>
 
             <div class="form-group row mt-4">
-              <label for="user_last_name" class="col-sm-3 col-form-label">Confirm Password</label>
+              <label for="user_password_confirmation" class="col-sm-3 col-form-label">Confirm Password*</label>
 
-              <div class="col-sm-9">
+              <div class="col-sm-9 my-auto">
                 <%= f.input :password_confirmation,
                             required: true,
                             label: false,
@@ -122,7 +113,7 @@
               </div>
             </div>
             
-            <div class="form-actions text-center">
+            <div class="form-actions text-center mt-4">
               <%= f.button :submit, "Sign Up", class: "btn btn-primary" %>
             </div>
           <% end %>
