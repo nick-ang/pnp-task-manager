@@ -15,6 +15,7 @@ class ApplicationController < ActionController::Base
   end
 
   def demo_user
+    @project_new = Project.new
     if User.all.length > 6
       @demo = User.find(6)
     else

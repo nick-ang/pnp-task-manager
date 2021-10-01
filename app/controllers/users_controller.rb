@@ -23,5 +23,6 @@ class UsersController < ApplicationController
 
   def find_user
     @user = User.find(params[:id])
+    @project_new = Project.new
   end
 end
