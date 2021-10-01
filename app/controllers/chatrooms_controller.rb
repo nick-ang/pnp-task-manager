@@ -9,6 +9,7 @@ class ChatroomsController < ApplicationController
     @project_new = Project.new
     @chatrooms = Chatroom.all
     @projects = Project.all
+    @project_edit = Project.new
   end
 
   def create

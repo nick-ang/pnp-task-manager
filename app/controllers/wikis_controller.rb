@@ -3,6 +3,7 @@ class WikisController < ApplicationController
 
   def index
     @project_new = Project.new
+    @project_edit = Project.new
     @wikis = Wiki.all
     @projects = Project.all
     @q = Wiki.ransack(params[:q])

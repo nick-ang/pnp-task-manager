@@ -1,11 +1,10 @@
-<%= simple_form_for (@project_edit) do |f| %>
+<% if current_user %>
+  <%= simple_form_for (@project_edit) do |f| %>
     <%= f.input :progress, :as => :hidden, :input_html => { :value => "0" } %>
     <%= f.input :status, :as => :hidden, :input_html => { :value => "not_started" } %>
     <%= f.input :created_by, :as => :hidden, :input_html => { :value => current_user.id } %>
-
     <div class="form-group">
       <label for="project_name">Project Name*</label>
-
       <%= f.input :name,
                   required: true,
                   autofocus: true,
@@ -13,35 +12,28 @@
                   placeholder: "Project Name",
                   wrapper_html: { class: "mb-0" } %>
     </div>
-
     <div class="form-group">
       <label for="project_start_date_1i">Start Date*</label>
-
       <%= f.input :start_date,
                   required: true,
                   label: false,
                   wrapper_html: { class: "mb-0" } %>
     </div>
-
     <div class="form-group">
       <label for="project_end_date_1i">Due Date*</label>
-
       <%= f.input :end_date,
                   required: true,
                   label: false,
                   wrapper_html: { class: "mb-0" } %>
     </div>
-
     <div class="form-group">
       <label for="project_user_ids">Assign To*</label>
-
       <%= f.association :users,
                   required: true,
                   label: false,
                   label_method: :first_name,
                   wrapper_html: { class: "mb-0" } %>
     </div>
-
   </div>
   <%= f.input :name %>
   <%= f.input :progress,
@@ -52,9 +44,9 @@
   <%= f.association :users, label_method: :first_name %>
   <%= f.input :status, collection: Project.statuses.keys %>
   <%= f.input :created_by, :as => :hidden, :input_html => { :value => current_user.id }, label: "Created_by User ID:" %>
-
   <div class="modal-footer">
     <button type="button" class="btn btn-secondary" data-dismiss="modal" aria-label="Close">Cancel</button>
     <%= f.submit "Update Project", class: "btn btn-primary" %>
   </div>
+<% end %>
 <% end %>

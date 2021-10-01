@@ -24,7 +24,6 @@
       <%= render 'shared/flashes' %>
       <%= yield %>
     </div>
-
     <div class="modal fade" id="newProject" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="newProjectLabel" aria-hidden="true">
       <div class="modal-dialog modal-dialog-centered modal-lg modal-dialog-scrollable">
         <div class="modal-content">
@@ -34,14 +33,12 @@
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
-
           <div class="modal-body">
             <%= render "projects/new", project: @project_new %>
           </div>
         </div>
       </div>
     </div>
-
     <div class="modal fade" id="editProject" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="newProjectLabel" aria-hidden="true">
       <div class="modal-dialog modal-dialog-centered modal-lg modal-dialog-scrollable">
         <div class="modal-content">
@@ -51,9 +48,8 @@
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
-
           <div class="modal-body">
-            <%#= render "projects/edit", project: @project_edit %>
+            <%= render "projects/edit", project: @project_edit %>
           </div>
         </div>
       </div>

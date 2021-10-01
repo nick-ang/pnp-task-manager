@@ -13,6 +13,7 @@ class TasksController < ApplicationController
 
   def new
     @task = Task.new
+    @project_edit = Project.find(params[:project_id])
     @project_new = Project.new
   end
 

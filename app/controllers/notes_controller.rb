@@ -3,6 +3,7 @@ class NotesController < ApplicationController
 
   def index
     @project_new = Project.new
+    @project_edit = Project.new
     @notes = current_user.notes
     @projects = Project.all
   end

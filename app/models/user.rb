@@ -3,8 +3,8 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
-  enum position: %i[project_manager employee administrator]
-  enum gender: %i[male female]
+  enum position: %i[Project_manager Employee Administrator]
+  enum gender: %i[Male Female]
   has_many :project_assigns, dependent: :destroy
   has_many :projects, through: :project_assigns
   has_many :kanbans, through: :projects
