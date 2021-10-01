@@ -7,6 +7,6 @@ class NotificationsController < ApplicationController
 
   def destroy
     @notification = Notification.find(params[:id])
-    @notification.destroy
+    @notification.mark_as_read!
   end
 end

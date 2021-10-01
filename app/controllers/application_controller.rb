@@ -23,7 +23,7 @@ class ApplicationController < ActionController::Base
       @message = Message.new
     end
     if current_user
-      @notifications = current_user.notifications
+      @notifications = current_user.notifications.unread
       if current_user.admin?
         @projects = Project.all
         @kanbans = Kanban.all
