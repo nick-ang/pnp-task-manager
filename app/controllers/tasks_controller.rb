@@ -13,11 +13,13 @@ class TasksController < ApplicationController
 
   def new
     @task = Task.new
+    @projects = Project.all
     @project_edit = Project.find(params[:project_id])
     @project_new = Project.new
   end
 
   def create
+    @projects = Project.all
     @project = Project.find(params[:project_id])
     @task = Task.new(task_params)
     @kanban = Kanban.where(:project_id => params[:project_id])
