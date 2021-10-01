@@ -3,6 +3,7 @@ class PagesController < ApplicationController
 
   def home
     @project_new = Project.new
+    @project_edit = Project.new
     @notification = Notification.new
     if Chatroom.all.count > 0
       @chatroom = Chatroom.new
