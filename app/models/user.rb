@@ -5,6 +5,8 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
   enum position: %i[Project_manager Employee Administrator]
   enum gender: %i[Male Female]
+  enum pay_due: %i[Yes No]
+  enum pay_cycle: %i[Weekly Fortnightly Monthly]
   has_many :project_assigns, dependent: :destroy
   has_many :projects, through: :project_assigns
   has_many :kanbans, through: :projects

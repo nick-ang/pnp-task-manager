@@ -18,6 +18,8 @@
                 <%= f.search_field :title_cont %>
                 <%= f.label :description_cont %>
                 <%= f.search_field :description_cont %>
+                <%= f.label :author_cont %>
+                <%= f.search_field :author_cont %>
                 <%= f.submit %>
               <% end %>
             </div>
@@ -27,6 +29,7 @@
               <% @search.each do |wiki| %>
                 <li>
                   <%= wiki.title %>
+                  <%= wiki.author %>
                   <%= link_to " | Edit", edit_wiki_path(wiki) %>
                 </li>
               <% end %>
@@ -40,6 +43,7 @@
         <% @wikis.each do |wiki| %>
           <div class = "card">
             <%= link_to "#{wiki.title}", edit_wiki_path(wiki) %><br>
+            <%= wiki.author %>
             <%= link_to "Delete",
                               wiki_path(wiki),
                               method: :delete,

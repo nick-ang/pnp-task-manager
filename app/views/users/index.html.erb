@@ -1,0 +1,43 @@
+<% # Checks if user is signed in %>
+<% if @users %>
+  <div class="container-fluid d-flex mt-3">
+    <div class = "container">
+      <div class ="wrapper w-100" >
+        <div class = "container p-5 ">
+          <div class = "card">
+            <h1>HR Payroll and Employee Details</h1>
+            <br>
+            <h2>Search for an employee...</h2>
+            <div class = "container">
+              <%= search_form_for [@q] do |f| %>
+                <%= f.label :email_cont %>
+                <%= f.search_field :email_cont %>
+                <%= f.label :position_cont %>
+                <%= f.search_field :position_cont %>
+                <%= f.label :first_name_cont %>
+                <%= f.search_field :first_name_cont %>
+                <%= f.label :last_name_cont %>
+                <%= f.search_field :last_name_cont %>
+                <%= f.label :pay_due_cont %>
+                <%= f.search_field :pay_due_cont %>
+                <%= f.submit %>
+              <% end %>
+            </div>
+            <div class="  container">
+              <br>
+              <h2>Search Results:</h2>
+              <% @search.each do |user| %>
+                <div class = "card">
+                  <%= link_to "#{user.first_name} #{user.last_name} ", edit_user_path(user) %><br>
+                  <%= "#{user.email}, #{user.position}, #{user.phone}, #{user.gender}, #{user.salary}, #{user.employee_number}" %>
+                  <%= "Pay Due in Next Two Days: #{user.pay_due}" %>
+                </div>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      </div>
+      <%= link_to " Add a new user", new_user_path() %>
+    </div>
+  </div>
+<% end %>
