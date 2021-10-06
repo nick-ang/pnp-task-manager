@@ -40,12 +40,14 @@
                collection: User.pay_cycles.keys,
                wrapper_html: { class: "mb-0" } %>
       <br>
-      <%= "Pay Next Due: #{@next.strftime("%a %b %e")}" %>
-      <br>
-      <br>
-      <%= "Pay Due in Next Two Days: #{@user.pay_due}" %>
-      <br>
-      <br>
+      <% if @next %>
+        <%= "Pay Next Due: #{@next.strftime("%a %b %e")}" %>
+        <br>
+        <br>
+        <%= "Pay Due in Next Two Days: #{@user.pay_due}" %>
+        <br>
+        <br>
+      <% end %>
       <%= f.input :last_pay,
 as: :date, html5: true %>
       <%= f.input :tfn,

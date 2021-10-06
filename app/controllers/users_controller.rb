@@ -14,30 +14,32 @@ class UsersController < ApplicationController
 
   # As a user I can edit and update my profile
   def edit
-    @date = @user.last_pay
-    @cycle = @user.pay_cycle
-    @now = DateTime.now
-    @diff = -1 * (@date - @now) / 60 / 60 / 24
-    if @cycle == "Weekly"
-      @next = @date + 7 * 24 * 60 * 60
-      if @diff > 4
-        @user.pay_due = "Yes"
+    if @user.last_pay && @user.pay_cycle
+      @date = @user.last_pay
+      @cycle = @user.pay_cycle
+      @now = DateTime.now
+      @diff = -1 * (@date - @now) / 60 / 60 / 24
+      if @cycle == "Weekly"
+        @next = @date + 7 * 24 * 60 * 60
+        if @diff > 4
+          @user.pay_due = "Yes"
+        else
+          @user.pay_due = "No"
+        end
+      elsif @cycle == "Fortnightly"
+        @next = @date + 14 * 24 * 60 * 60
+        if @diff > 11
+          @user.pay_due = "Yes"
+        else
+          @user.pay_due = "No"
+        end
       else
-        @user.pay_due = "No"
-      end
-    elsif @cycle == "Fortnightly"
-      @next = @date + 14 * 24 * 60 * 60
-      if @diff > 11
-        @user.pay_due = "Yes"
-      else
-        @user.pay_due = "No"
-      end
-    else
-      @next = @date + 28 * 24 * 60 * 60
-      if @diff > 25
-        @user.pay_due = "Yes"
-      else
-        @user.pay_due = "No"
+        @next = @date + 28 * 24 * 60 * 60
+        if @diff > 25
+          @user.pay_due = "Yes"
+        else
+          @user.pay_due = "No"
+        end
       end
     end
   end
