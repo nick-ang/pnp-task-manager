@@ -3,7 +3,7 @@ class PagesController < ApplicationController
 
   def home
     @unique_tasks = {}
-    if current_user.tasks
+    if current_user
       current_user.tasks.each do |task|
         if task.users.include?(current_user)
           if @unique_tasks[task.status]
