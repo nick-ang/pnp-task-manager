@@ -1,16 +1,16 @@
-<%# Checks if user is signed in %>
+<% # Checks if user is signed in %>
 <% if user_signed_in? %>
   <div class="container-fluid">
     <div class="row min-height-viewport">
       <div class="sidebar col-md-3 pt-3 pnp_bg_blue">
         <%= render "shared/projects_sidebar", project: @projects %>
       </div>
-      <div id="project-container" class="col-md-9 bg-white">
-        <%# Show all projects %>
-        <%  project = @project %>
-        <% if project.user_ids.include?(current_user.id) || current_user.id == project.created_by || current_user.admin%>
-          <%# Get project details %>
-          <%= render "pages/todo", project: project, task: @tasks%>
+      <div id="project-container" class="col-md-9 p-5 bg-white">
+        <% # Show all projects %>
+        <% project = @project %>
+        <% if project.user_ids.include?(current_user.id) || current_user.id == project.created_by || current_user.admin %>
+          <% # Get project details %>
+          <%= render "pages/todo", project: project, task: @tasks %>
         <% end %>
       </div>
     </div>
