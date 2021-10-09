@@ -13,23 +13,50 @@
               <h4 class="card-title flex-grow-1 mb-0">
                 <%= link_to "#{project.name}", project_path(project), class: "nav-link active mb-0 pl-0" %>
               </h4>
-              <%= link_to new_project_task_path(project), class: "mr-2", 'data-toggle' => "tooltip", 'data-placement' => "top", title: "Add New Task" do %>
+              <%= link_to new_project_task_path(project), class: "mr-2", "data-toggle" => "tooltip", "data-placement" => "top", title: "Add New Task" do %>
                 <i class="bi bi-file-earmark-plus" style="font-size: 1.25rem;"></i>
               <% end %>
-              <%= link_to edit_project_path(project), class: "mr-2", 'data-toggle' => "modal", 'data-target' => "#editProject", title: "Edit Project" do %>
+              <%= link_to edit_project_path(project), class: "mr-2", "data-toggle" => "modal", "data-target" => "#editProject", title: "Edit Project" do %>
                 <i class="bi bi-pencil" style="font-size: 1.25rem;"></i>
               <% end %>
               <%= link_to project_path(project),
-                method: :delete,
-                data: { confirm: "Are you sure?" },
-                'data-toggle' => "tooltip",
-                'data-placement' => "top",
-                title: "Delete Project" do %>
+                          method: :delete,
+                          data: { confirm: "Are you sure?" },
+                          "data-toggle" => "tooltip",
+                          "data-placement" => "top",
+                          title: "Delete Project" do %>
                 <i class="bi bi-trash" style="font-size: 1.25rem;"></i>
               <% end %>
             </div>
+            <% @total = project.tasks.count %>
+            <% @complete = project.tasks.completed.count %>
+            <% if @complete > 0 && @total > 0 %>
+              <% @percent = (@complete.to_f / @total) * 100 %>
+            <% else %>
+              <% @percent = 0 %>
+            <% end %>
+            <% @start_date = project.start_date %>
+            <% @end_date = project.end_date %>
+            <% @proj_days = (@end_date - @start_date) / 60 / 60 / 24 %>
+            <% @now = DateTime.now %>
+            <% @days_left = (@start_date - @now) * -1 / 60 / 60 / 24 %>
+            <% if @days_left > 0 && @proj_days > 0 %>
+              <% if (@days_left / @proj_days.to_f) * 100 > 101 %>
+                <% @percent_day = 100 %>
+              <% else %>
+                <% @percent_day = (@days_left / @proj_days.to_f) * 100 %>
+              <% end %>
+            <% else %>
+              <% @percent_day = 0 %>
+            <% end %>
             <div class="progress my-2">
-              <div class="progress-bar" role="progressbar" style="width: <%= project.progress %>%" aria-valuenow="<%= project.progress %>" aria-valuemin="0" aria-valuemax="100"><%= project.progress %>%</div>
+              <div class="progress-bar" role="progressbar" style="width: <%= project.progress %>%" aria-valuenow="<%= project.progress %>" aria-valuemin="0" aria-valuemax="100"><%= "Overall #{project.progress}" %>%</div>
+            </div>
+            <div class="progress my-2">
+              <div class="progress-bar bg-success progress-bar-stripped" role="progressbar" style="width: <%= @percent.to_i %>%" aria-valuenow="<%= @percent.to_i %>" aria-valuemin="0" aria-valuemax="100"><%= "Tasks #{@percent.to_i}" %>%</div>
+            </div>
+            <div class="progress my-2">
+              <div class="progress-bar bg-warning progress-bar-stripped" role="progressbar" style="width: <%= @percent_day.to_i %>%" aria-valuenow="<%= @percent_day.to_i %>" aria-valuemin="0" aria-valuemax="100"><%= "Date #{@percent_day.to_i}" %>%</div>
             </div>
             <div class="row">
               <% if project.start_date %>

@@ -102,6 +102,11 @@ ProjectAssign.create(
   project: project1,
 )
 
+ProjectAssign.create(
+  user: user1,
+  project: project2,
+)
+
 my_kanban = Kanban.create(
   project: project1,
 )
@@ -125,30 +130,32 @@ my_kanban2 = Kanban.create(
   project: project2,
 )
 
-backlog1 = KanbanColumn.create(
+backlog2 = KanbanColumn.create(
   name: "not_started",
   kanban: my_kanban2,
 )
 
-todo1 = KanbanColumn.create(
+todo2 = KanbanColumn.create(
   name: "in_progress",
   kanban: my_kanban2,
 )
 
-completed1 = KanbanColumn.create(
+completed2 = KanbanColumn.create(
   name: "completed",
   kanban: my_kanban2,
 )
 
-task1 = Task.create(name: "Push to Heroku", position: 0, status: "not_started", kanban_column: backlog, priority: "low", due_date: DateTime.now() + 1)
+task1 = Task.create(duration: 1, name: "Push to Heroku", position: 0, status: "not_started", kanban_column: backlog, priority: "low", due_date: DateTime.now() + 1)
 TaskAssign.create(user: user1, task: task1)
-task2 = Task.create(name: "Bug testing", position: 0, status: "in_progress", kanban_column: todo, priority: "medium", due_date: DateTime.now() + 3)
+task2 = Task.create(duration: 10, name: "Bug testing", position: 0, status: "in_progress", kanban_column: todo, priority: "medium", due_date: DateTime.now() + 3)
 TaskAssign.create(user: user2, task: task2)
-task3 = Task.create(name: "Develop program", position: 0, status: "completed", kanban_column: completed, priority: "high", due_date: DateTime.now() - 10)
+task3 = Task.create(duration: 1000, name: "Develop program", position: 0, status: "completed", kanban_column: completed, priority: "high", due_date: DateTime.now() - 10)
 TaskAssign.create(user: user2, task: task3)
 TaskAssign.create(user: user1, task: task3)
-task4 = Task.create(name: "Finalize Documentation", position: 1, status: "not_started", kanban_column: backlog, priority: "medium", due_date: DateTime.now() - 3)
+task4 = Task.create(duration: 15, name: "Finalize Documentation", position: 1, status: "not_started", kanban_column: backlog, priority: "medium", due_date: DateTime.now() - 3)
 TaskAssign.create(user: user2, task: task4)
+task5 = Task.create(duration: 5000, name: "Review and Deploy", position: 1, status: "completed", kanban_column: completed2, priority: "high", due_date: DateTime.new(2021, 8, 18))
+TaskAssign.create(user: user1, task: task5)
 Note.create(title: "Check if HR paid", description: "Message Setare", user: user2, color: "red")
 Note.create(title: "Buy Milk Tonight", description: "2 L Brownes", user: user2, color: "green")
 Note.create(title: "Mums birthday in two weeks", description: "", user: user2, color: "yellow")
