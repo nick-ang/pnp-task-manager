@@ -30,6 +30,14 @@
                 <%= "Author: #{wiki.author}" %>
                 <% if current_user.admin %>
                   <%= link_to " | Edit", edit_wiki_path(wiki) %>
+                  <%= link_to wiki_path(wiki),
+                              method: :delete,
+                              data: { confirm: "Are you sure?" },
+                              "data-toggle" => "tooltip",
+                              "data-placement" => "top",
+                              title: "Delete Task" do %>
+                  <i class="bi bi-trash" style="font-size: 1.15rem;"></i>
+                <% end %>
                 <% end %>
               </li>
             <% end %>
