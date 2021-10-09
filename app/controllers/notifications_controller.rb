@@ -8,5 +8,6 @@ class NotificationsController < ApplicationController
   def destroy
     @notification = Notification.find(params[:id])
     @notification.mark_as_read!
+    redirect_back fallback_location: root_path
   end
 end

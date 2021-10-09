@@ -40,6 +40,7 @@ class CommentNotification < Noticed::Base
 
   def url
     @chatroom = Chatroom.find(params[:message].chatroom_id)
+    @record.mark_as_read!
     chatroom_path(@chatroom)
   end
 end

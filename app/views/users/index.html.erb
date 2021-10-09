@@ -34,7 +34,7 @@
               <br>
               <% current_user.projects.each do |project| %>
                 <% project.tasks.each do |task| %>
-                  <% if task.user_ids.include?(user.id) %>
+                  <% if task.user_ids.include?(user.id) && task.duration %>
                     <% init += task.duration %>
                   <% end %>
                 <% end %>

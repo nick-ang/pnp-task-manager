@@ -34,6 +34,7 @@ class TasksController < ApplicationController
       @task.kanban_column = nil
     end
     if @task.save
+      TaskNotification.with(task: @task).deliver(@task.users)
       redirect_to @project
     else
       render :new
@@ -47,6 +48,7 @@ class TasksController < ApplicationController
   def update
     @task = Task.find(params[:id])
     @task.update(task_params)
+    TaskNotification.with(task: @task).deliver(@task.users)
     @kanban_column = @task.kanban_column
     @kanban = @kanban_column.kanban
     @project = @kanban.project
@@ -55,6 +57,11 @@ class TasksController < ApplicationController
 
   def destroy
     @task = Task.find(params[:id])
+    @notifications.each do |notification|
+      if notification.params[:task] == @task
+        notification.destroy
+      end
+    end
     @task.destroy
     @kanban_column = @task.kanban_column
     @kanban = @kanban_column.kanban
