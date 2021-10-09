@@ -1,6 +1,10 @@
 class WikisController < ApplicationController
   before_action :authenticate_user!
 
+  def show
+    @wiki = Wiki.find(params[:id])
+  end
+
   def index
     @project_new = Project.new
     @project_edit = Project.new
@@ -8,6 +12,7 @@ class WikisController < ApplicationController
     @projects = Project.all
     @q = Wiki.ransack(params[:q])
     @search = @q.result(distinct: true)
+    @notifications = current_user.notifications.unread
   end
 
   def new

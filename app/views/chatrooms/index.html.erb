@@ -1,37 +1,36 @@
 <% # Checks if user is signed in %>
 <% if @chatrooms %>
- <div class="container-fluid">
-  <div class="row min-height-viewport">
-<div class="col-md-3 pt-3 pnp_bg_blue max-height-viewport overflow-y-scroll">
+  <div class="container-fluid">
+    <div class="row min-height-viewport">
+      <div class="col-md-3 pt-3 pnp_bg_blue max-height-viewport overflow-y-scroll">
         <%= render "shared/tasks_sidebar", project: @projects %>
       </div>
-    <div class="dashboard col-md-9 pt-3 max-height-viewport overflow-y-scroll">
-    <div class = "container">
-      <h4>Welcome to the Company chatroom Database</h4>
-      <%= link_to "create a new chatroom", new_chatroom_path() %>
-      <div class = "chatroom-grid container">
-        <% @chatrooms.each do |chatroom| %>
-          <% "Chat Members: #{array_project = chatroom.users.each} " %>
-          <% if array_project.include?(current_user) || current_user.admin %>
-            <div class = "card">
-              <%= link_to chatroom.name, chatroom_path(chatroom) %>
-              <% array_project.map do |id|
-                   id.first_name
-                 end %>
-              <%= "Project Team Members: " %>
-              <% array_project.each do |user| %>
-                <%= "#{user.first_name}  |  " %>
-              <% end %>
-              <%= link_to "Delete",
-                          chatroom_path(chatroom),
-                          method: :delete,
-                          data: { confirm: "Are you sure?" } %>
-            </div>
+      <div class="dashboard col-md-9 pt-3 max-height-viewport overflow-y-scroll">
+        <div class = "container">
+          <h1>Welcome to the Company chatroom Database</h1>
+          <br>
+          <% @chatrooms.each do |chatroom| %>
+            <% "Chat Members: #{array_project = chatroom.users.each} " %>
+            <% if array_project.include?(current_user) || current_user.admin %>
+              <div class = "card">
+                <%= link_to chatroom.name, chatroom_path(chatroom) %>
+                <% array_project.map do |id|
+                     id.first_name
+                   end %>
+                <%= "Project Team Members: " %>
+                <% array_project.each do |user| %>
+                  <%= "#{user.first_name}  |  " %>
+                <% end %>
+                <%= link_to "Delete",
+                            chatroom_path(chatroom),
+                            method: :delete,
+                            data: { confirm: "Are you sure?" } %>
+              </div>
+            <% end %>
           <% end %>
-        <% end %>
+          <%= link_to "create a new chatroom", new_chatroom_path() %>
+        </div>
       </div>
     </div>
-  </div>
-      </div>
   </div>
 <% end %>

@@ -37,7 +37,7 @@ class ApplicationController < ActionController::Base
       end
       @users = User.all
       if current_user.admin?
-        @tasks = Task.all
+        @tasks = current_user.tasks
       elsif current_user.tasks
         @tasks = current_user.tasks
         @messages = Message.all

@@ -15,14 +15,14 @@
             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="notificationDropdownMenuButton">
               <% if @projects %>
                 <% @projects.each do |project| %>
-    <% if project.user_ids.include?(current_user.id) || current_user.id == project.created_by || current_user.admin %>
-      <div class="card border border-secondary bg-white text-center rounded-lg mb-3">
-        <div class="card-body p-0 py-1">
-          <%= link_to "#{project.name}", project_path(project) %>
-        </div>
-      </div>
-    <% end %>
-  <% end %>
+                  <% if project.user_ids.include?(current_user.id) || current_user.id == project.created_by || current_user.admin %>
+                    <div class="card border border-secondary bg-white text-center rounded-lg mb-3">
+                      <div class="card-body p-0 py-1">
+                        <%= link_to "#{project.name}", project_path(project) %>
+                      </div>
+                    </div>
+                  <% end %>
+                <% end %>
               <% end %>
             </div>
           </div>
@@ -32,31 +32,31 @@
           <% if user_signed_in? && current_user.admin %>
             <a class="nav-link" href="<%= rails_admin_path %>">Admin Dashboard</a>
           <% end %>
-                    <% if user_signed_in? && current_user.position = "Administrator" %>
+          <% if user_signed_in? && current_user.position == "Administrator" %>
             <a class="nav-link" href="<%= users_path %>">HR</a>
           <% end %>
           <div class="d-inline-flex justify-content-end align-items-center navbar-height">
             <% if user_signed_in? %>
               <div class="dropdown">
                 <a class="btn dropdown-toggle pnp_navbar_dropdown_icon" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                       <% if @notifications.length > 0 %>
-<i class="bi bi-bell-fill"></i>
-                <% else %>
-                  <i class="bi bi-bell"></i>
+                  <% if @notifications.length > 0 %>
+                    <i class="bi bi-bell-fill"></i>
+                  <% else %>
+                    <i class="bi bi-bell"></i>
                   <% end %>
                 </a>
-
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="notificationDropdownMenuButton">
                   <% if @notifications %>
-                     <% @notifications.order(id: :desc).each do |notification| %>
-                <%= link_to notification.to_notification.message, notification.to_notification.url %>
+                    <% @notifications.order(id: :desc).each do |notification| %>
+                      <%= link_to notification.to_notification.message, notification.to_notification.url %>
                       <%= link_to notification_path(notification),
                                   method: :delete,
                                   "data-toggle" => "tooltip",
                                   "data-placement" => "top",
                                   title: "Clear notification" do %>
-                <i class="bi bi-trash" style="font-size: 1.25rem;"></i>
-                <% end %>
+                        <i class="bi bi-trash" style="font-size: 1.25rem;"></i>
+                        <br>
+                      <% end %>
                     <% end %>
                     <p class="dropdown-header">No new notifications!</p>
                   <% end %>
@@ -95,9 +95,9 @@
       <% if user_signed_in? && current_user.admin %>
         <a class="nav-link" href="<%= rails_admin_path %>">Admin Dashboard</a>
       <% end %>
-       <% if user_signed_in? && current_user.position = "Administrator" %>
-            <a class="nav-link" href="<%= users_path %>">HR</a>
-          <% end %>
+      <% if user_signed_in? && current_user.admin %>
+        <a class="nav-link" href="<%= users_path %>">HR</a>
+      <% end %>
       <div class="dropdown-divider border-dark"></div>
       <% if user_signed_in? %>
         <div class="dropdown">

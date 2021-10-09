@@ -156,14 +156,16 @@ task4 = Task.create(duration: 15, name: "Finalize Documentation", position: 1, s
 TaskAssign.create(user: user2, task: task4)
 task5 = Task.create(duration: 5000, name: "Review and Deploy", position: 1, status: "completed", kanban_column: completed2, priority: "high", due_date: DateTime.new(2021, 8, 18))
 TaskAssign.create(user: user1, task: task5)
+task6 = Task.create(duration: 10, name: "Tally hours worked", position: 1, status: "completed", kanban_column: completed2, priority: "high", due_date: DateTime.new(2021, 8, 18))
+TaskAssign.create(user: user3, task: task6)
 Note.create(title: "Check if HR paid", description: "Message Setare", user: user2, color: "red")
 Note.create(title: "Buy Milk Tonight", description: "2 L Brownes", user: user2, color: "green")
 Note.create(title: "Mums birthday in two weeks", description: "", user: user2, color: "yellow")
 chat = Chatroom.create(name: "HR and Local Admin Chatroom")
 ChatroomAssign.create(user: user1, chatroom: chat)
 ChatroomAssign.create(user: user3, chatroom: chat)
-Wiki.create(title: "Sortable JS", description: "https://medium.com/le-wagon-tokyo/tutorial-build-a-drag-n-drop-kanban-board-on-rails-with-sortablejs-c6affa5642cf")
-Wiki.create(title: "Authy", description: "2FA in Rails 4 with Devise, Authy and Puppies
+Wiki.create(author: "Nick", user: user1, title: "Sortable JS", description: "https://medium.com/le-wagon-tokyo/tutorial-build-a-drag-n-drop-kanban-board-on-rails-with-sortablejs-c6affa5642cf")
+Wiki.create(author: "Nick", user: user1, title: "Authy", description: "2FA in Rails 4 with Devise, Authy and Puppies
 
 
 Passwords aren’t enough anymore. Keeping user data safe is hard enough without users themselves choosing the worst passwords in the world. Yes, “123456” has topped the list of most commonly used password of the year…again.

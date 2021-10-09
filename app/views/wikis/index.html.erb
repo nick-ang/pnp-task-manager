@@ -1,52 +1,43 @@
 <% # Checks if user is signed in %>
 <% if @wikis %>
   <div class="container-fluid">
-  <div class="row min-height-viewport">
-<div class="col-md-3 pt-3 pnp_bg_blue max-height-viewport overflow-y-scroll">
+    <div class="row min-height-viewport">
+      <div class="col-md-3 pt-3 pnp_bg_blue max-height-viewport overflow-y-scroll">
         <%= render "shared/tasks_sidebar", project: @projects %>
       </div>
-    <div class="dashboard col-md-9 pt-3 max-height-viewport overflow-y-scroll">
+      <div class="dashboard col-md-9 pt-3 max-height-viewport overflow-y-scroll">
+        <div class ="wrapper w-100 p-2" >
+          <h1>Welcome to the Company Wiki Database</h1>
+          <br>
           <div class = "card">
-            <h1>Search</h1>
-            <br>
-            <div class = "container">
-              <%= search_form_for [@q] do |f| %>
-                <%= f.label :title_cont %>
-                <%= f.search_field :title_cont %>
-                <%= f.label :description_cont %>
-                <%= f.search_field :description_cont %>
-                <%= f.label :author_cont %>
-                <%= f.search_field :author_cont %>
-                <%= f.submit %>
-              <% end %>
-            </div>
-            <div class="  container">
-              <br>
-              <h2>Search Results:</h2>
-              <% @search.each do |wiki| %>
-                <li>
-                  <%= wiki.title %>
-                  <%= wiki.author %>
+            <h2>Search for a Wiki</h2>
+            <%= search_form_for [@q] do |f| %>
+              <%= f.label :title_cont %>
+              <%= f.search_field :title_cont %>
+              <%= f.label :description_cont %>
+              <%= f.search_field :description_cont %>
+              <%= f.label :author_cont %>
+              <%= f.search_field :author_cont %>
+              <%= f.submit %>
+            <% end %>
+          </div>
+          <br>
+          <div class="card">
+            <h2>Search Results:</h2>
+            <% @search.each do |wiki| %>
+              <li>
+                <%= link_to "Title: #{wiki.title} |", wiki_path(wiki) %>
+                <%= "Author: #{wiki.author}" %>
+                <% if current_user.admin %>
                   <%= link_to " | Edit", edit_wiki_path(wiki) %>
-                </li>
-              <% end %>
-            </div>
+                <% end %>
+              </li>
+            <% end %>
+            <% if current_user.admin %>
+              <%= link_to " Add a new wiki", new_wiki_path() %>
+            <% end %>
           </div>
-      <h4>Welcome to the Company Wiki Database</h4>
-      <%= link_to " Add a new wiki", new_wiki_path() %>
-      <div class = "wiki-grid container">
-        <% @wikis.each do |wiki| %>
-          <div class = "card">
-            <%= link_to "#{wiki.title}", edit_wiki_path(wiki) %><br>
-            <%= wiki.author %>
-            <%= link_to "Delete",
-                        wiki_path(wiki),
-                        method: :delete,
-                        data: { confirm: "Are you sure?" } %>
-          </div>
-        <% end %>
+        </div>
       </div>
     </div>
-  </div>
-    </div>
-<% end %>
+  <% end %>

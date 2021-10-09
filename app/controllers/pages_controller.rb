@@ -2,6 +2,16 @@ class PagesController < ApplicationController
   before_action :authenticate_user!
 
   def home
+    @unique_tasks = {}
+    current_user.tasks.each do |task|
+      if task.users.include?(current_user)
+        if @unique_tasks[task.status]
+          @unique_tasks[task.status] += 1
+        else
+          @unique_tasks[task.status] = 1
+        end
+      end
+    end
     @project_new = Project.new
     @notification = Notification.new
     if Chatroom.all.count > 0
@@ -23,9 +33,9 @@ class PagesController < ApplicationController
       end
       @users = User.all
       if current_user.admin?
-        @tasks = Task.all
-      elsif current_user.tasks
         @tasks = current_user.tasks
+      elsif current_user.tasks
+        @tasks = Task.where(user_id: current_user)
         @messages = Message.all
       end
     end

@@ -43,6 +43,7 @@ class TasksController < ApplicationController
 
   def edit
     @task = Task.find(params[:id])
+    @notifications = current_user.notifications.unread
   end
 
   def update

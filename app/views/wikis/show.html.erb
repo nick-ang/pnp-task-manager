@@ -1,0 +1,26 @@
+
+
+
+  <div class="container-fluid">
+    <div class="row min-height-viewport">
+      <div class="col-md-3 pt-3 pnp_bg_blue max-height-viewport overflow-y-scroll">
+        <%= render "shared/tasks_sidebar", project: @projects %>
+      </div>
+      <div class="dashboard col-md-9 pt-3 max-height-viewport overflow-y-scroll">
+        <div class ="wrapper w-100 p-2" >
+          <h1>Welcome to the Company Wiki Database</h1>
+          <br>
+          <div class = "card p-5">
+<p>
+  <strong>Title:</strong>
+  <%= @wiki.title %>
+</p>
+<p>
+  <strong>Content:</strong>
+  <%= @wiki.description %>
+</p>
+</div>
+          <br>
+        </div>
+      </div>
+    </div>

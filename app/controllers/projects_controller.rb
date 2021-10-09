@@ -17,6 +17,7 @@ class ProjectsController < ApplicationController
     @kanban_columns.each do |column|
       @tasks << column.tasks.first
     end
+    @notifications = current_user.notifications.unread
   end
 
   def new
