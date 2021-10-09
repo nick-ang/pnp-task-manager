@@ -61,7 +61,39 @@ li {
 .fixed-card {
   padding: 2px;
   border-radius: 10px;
-  margin-bottom: 10px;
+  width:250px;
+  height:250px;
+  background-color: white;
+
+  margin: 5px;
+    margin: auto;
+  width: 350px;
+  overflow: hidden;
+  border-radius: 20px;
+  background: white;
+  margin-top: 25px;
+  margin-bottom:25px;
+  transition: all 0.2s;
+  box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.3);
+  color: black;
+
+  min-height: 300px;
+  position: relative;
+  display: flex;
+  justify-content: space-evenly;
+  align-content: center;
+  flex-direction: column;
+  min-width: 0;
+  word-wrap: break-word;
+}
+
+.fixed-card:hover {
+  box-shadow: 5px 5px 25px rgba(0, 0, 0, 0.5);
+  transform: translate(-5px, -5px);
+}
+
+.fixed-card:hover .icon svg {
+  animation: iconjln 1s;
 }
 
 .card {

@@ -7,14 +7,14 @@
       </div>
     <div class="dashboard col-md-9 pt-3 max-height-viewport overflow-y-scroll">
     <div class = "container">
-      <h4>Welcome to your Sticky Notes</h4>
+      <h1>Welcome to your Sticky Notes</h1>
       <%= link_to " Add a new note", new_note_path() %>
-      <div class = "note-grid container">
+      <br>
+      <div class = "note-grid container mb-5">
         <% @notes.each do |note| %>
-          <div class = "card">
-            <%= link_to "#{note.title}", edit_note_path(note) %><br>
-            <%= note.description %>
-            <%= note.colour %>
+          <div class = "fixed-card p-5" style="background-color: <%= note.colour %>">
+            <h3><%= link_to "Title: #{note.title}", edit_note_path(note) %></h3>
+            <h4><%= note.description %></h4>
             <%= link_to "Delete",
                         note_path(note),
                         method: :delete,
