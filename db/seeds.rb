@@ -10,53 +10,95 @@ KanbanColumn.destroy_all
 Kanban.destroy_all
 Task.destroy_all
 User.destroy_all
+Wiki.destroy_all
+Note.destroy_all
+Notification.destroy_all
+Message.destroy_all
+Chatroom.destroy_all
 
 user1 = User.create(
-  first_name: "admin",
-  last_name: "admin",
-  position: "administrator",
-  phone: "0",
-  gender: "male",
-  email: "admin@gmail.com",
+  first_name: "Nick",
+  last_name: "Ang",
+  position: "Project_manager",
+  phone: "0430102545",
+  gender: "Male",
+  email: "nick@pnp.com",
   password: "secret",
   admin: true,
+  salary: 100000,
+  pay_cycle: "Weekly",
+  birthdate: Date.new(1993, 7, 27),
+  tfn: 333888999,
+  bank_account: 17339022,
+  bank_bsb: 860078,
+  last_pay: DateTime.now() - 6,
 )
 
 user2 = User.create(
-  first_name: "manager",
-  last_name: "admin",
-  position: "project_manager",
-  phone: "0",
-  gender: "male",
-  email: "manager@gmail.com",
+  first_name: "Fisher",
+  last_name: "Lim",
+  position: "Employee",
+  phone: "0410142546",
+  gender: "Male",
+  email: "fisher@pnp.com",
   password: "secret",
+  admin: false,
+  salary: 80000,
+  pay_cycle: "Fortnightly",
+  birthdate: DateTime.new(1993, 7, 27, 4),
+  tfn: 444888999,
+  bank_account: 18439022,
+  bank_bsb: 120078,
+  last_pay: DateTime.now() - 15,
 )
 
 user3 = User.create(
-  first_name: "employee",
-  last_name: "admin",
-  position: "employee",
-  phone: "0",
-  gender: "male",
-  email: "employee@gmail.com",
+  first_name: "Setare",
+  last_name: "Akbare",
+  position: "Administrator",
+  phone: "0455162546",
+  gender: "Male",
+  email: "setare@pnp.com",
   password: "secret",
+  admin: false,
+  salary: 120000,
+  pay_cycle: "Monthly",
+  birthdate: DateTime.new(1993, 7, 27, 4),
+  tfn: 111888999,
+  bank_account: 30439022,
+  bank_bsb: 2220078,
+  last_pay: DateTime.now,
 )
 
 project1 = Project.create(
-  name: "Develop Front End",
+  name: "Develop PNP App",
   created_by: user1,
-  progress: 10,
+  progress: 90,
   status: "in_progress",
 )
 
-assign1 = ProjectAssign.create(
+project2 = Project.create(
+  name: "Develop Google App",
+  created_by: user1,
+  progress: 50,
+  status: "in_progress",
+)
+
+ProjectAssign.create(
   user: user1,
+  project: project1,
+)
+ProjectAssign.create(
+  user: user2,
+  project: project1,
+)
+
+ProjectAssign.create(
+  user: user3,
   project: project1,
 )
 
 my_kanban = Kanban.create(
-  name: "New Lamborgucci project",
-  description: "Project to build the most esthetically car ever made.",
   project: project1,
 )
 
@@ -64,21 +106,32 @@ backlog = KanbanColumn.create(
   name: "not_started",
   kanban: my_kanban,
 )
-Task.create(name: "Build engine", position: 0, kanban_column: backlog)
 
 todo = KanbanColumn.create(
   name: "in_progress",
   kanban: my_kanban,
 )
-Task.create(name: "Design the car", position: 0, kanban_column: todo)
 
 completed = KanbanColumn.create(
   name: "completed",
   kanban: my_kanban,
 )
 
-Task.create(name: "Build the engineer team", position: 0, kanban_column: completed)
-Note.create(title: "Build the engineer team", description: "Organise meeting", user: user2)
+task1 = Task.create(name: "Push to Heroku", position: 0, status: "not_started", kanban_column: backlog, priority: "low", due_date: DateTime.now() + 1)
+TaskAssign.create(user: user1, task: task1)
+task2 = Task.create(name: "Bug testing", position: 0, status: "in_progress", kanban_column: todo, priority: "medium", due_date: DateTime.now() + 3)
+TaskAssign.create(user: user2, task: task2)
+task3 = Task.create(name: "Develop program", position: 0, status: "completed", kanban_column: completed, priority: "high", due_date: DateTime.now() - 10)
+TaskAssign.create(user: user2, task: task3)
+TaskAssign.create(user: user1, task: task3)
+task4 = Task.create(name: "Finalize Documentation", position: 1, status: "not_started", kanban_column: backlog, priority: "medium", due_date: DateTime.now() - 3)
+TaskAssign.create(user: user2, task: task4)
+Note.create(title: "Check if HR paid", description: "Message Setare", user: user2, color: "red")
+Note.create(title: "Buy Milk Tonight", description: "2 L Brownes", user: user2, color: "green")
+Note.create(title: "Mums birthday in two weeks", description: "", user: user2, color: "yellow")
+chat = Chatroom.create(name: "HR and Local Admin Chatroom")
+ChatroomAssign.create(user: user1, chatroom: chat)
+ChatroomAssign.create(user: user3, chatroom: chat)
 Wiki.create(title: "Sortable JS", description: "https://medium.com/le-wagon-tokyo/tutorial-build-a-drag-n-drop-kanban-board-on-rails-with-sortablejs-c6affa5642cf")
 Wiki.create(title: "Authy", description: "2FA in Rails 4 with Devise, Authy and Puppies
 
@@ -181,7 +234,7 @@ Now you have your API key, copy config/env.yml.example to config/env.yml and fil
 # config/env.yml
 development:
   AUTHY_API_KEY: 'YOUR_AUTHY_API_KEY_HERE'
-We’re using a gem called envyable to set the API key in your application’s environment. It’s all set up for you, but if you’re interested in this setup more, I wrote about environments and envyable last year.
+We��re using a gem called envyable to set the API key in your application’s environment. It’s all set up for you, but if you’re interested in this setup more, I wrote about environments and envyable last year.
 
 Now we���re ready to run our Devise Authy install script. On the command line enter:
 
