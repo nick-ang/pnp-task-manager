@@ -1,9 +1,14 @@
 <% # Checks if user is signed in %>
 <% if @users %>
-  <div class="container-fluid d-flex mt-3">
+ <div class="container-fluid">
+  <div class="row min-height-viewport">
+<div class="col-md-3 pt-3 pnp_bg_blue max-height-viewport overflow-y-scroll">
+        <%= render "shared/tasks_sidebar", project: @projects %>
+      </div>
+    <div class="dashboard col-md-9 pt-3 max-height-viewport overflow-y-scroll">
     <div class = "container">
       <div class ="wrapper w-100" >
-        <div class = "container p-5 ">
+        <div class = "container">
           <div class = "card">
             <h1>HR Payroll and Employee Details</h1>
             <br>
@@ -35,7 +40,8 @@
           </div>
         </div>
       </div>
-      <%= link_to " Add a new user", new_user_path() %>
     </div>
+  </div>
+      </div>
   </div>
 <% end %>

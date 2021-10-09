@@ -1,14 +1,11 @@
-<%# Checks if user is signed in %>
+<% # Checks if user is signed in %>
 <% if @wikis %>
-  <div class="container-fluid d-flex mt-3">
-    <div class="sidebar col-3">
-      <h4>Projects</h4>
-      <%= render "shared/tasks_sidebar", project: @projects %>
-      <%# <%= render "kanban", project: @project %>
-    </div>
-    <div class = "container">
-      <div class ="wrapper w-100" >
-        <div class = "container p-5 ">
+  <div class="container-fluid">
+  <div class="row min-height-viewport">
+<div class="col-md-3 pt-3 pnp_bg_blue max-height-viewport overflow-y-scroll">
+        <%= render "shared/tasks_sidebar", project: @projects %>
+      </div>
+    <div class="dashboard col-md-9 pt-3 max-height-viewport overflow-y-scroll">
           <div class = "card">
             <h1>Search</h1>
             <br>
@@ -35,8 +32,6 @@
               <% end %>
             </div>
           </div>
-        </div>
-      </div>
       <h4>Welcome to the Company Wiki Database</h4>
       <%= link_to " Add a new wiki", new_wiki_path() %>
       <div class = "wiki-grid container">
@@ -45,12 +40,13 @@
             <%= link_to "#{wiki.title}", edit_wiki_path(wiki) %><br>
             <%= wiki.author %>
             <%= link_to "Delete",
-                              wiki_path(wiki),
-                              method: :delete,
-                              data: { confirm: "Are you sure?" } %>
+                        wiki_path(wiki),
+                        method: :delete,
+                        data: { confirm: "Are you sure?" } %>
           </div>
         <% end %>
       </div>
     </div>
   </div>
+    </div>
 <% end %>

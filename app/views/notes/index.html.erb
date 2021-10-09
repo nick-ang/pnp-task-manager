@@ -1,11 +1,11 @@
-<%# Checks if user is signed in %>
+<% # Checks if user is signed in %>
 <% if @notes %>
-  <div class="container-fluid d-flex mt-3">
-    <div class="sidebar col-3">
-      <h4>Projects</h4>
-      <%= render "shared/tasks_sidebar", project: @projects %>
-      <%# <%= render "kanban", project: @project %>
-    </div>
+ <div class="container-fluid">
+  <div class="row min-height-viewport">
+<div class="col-md-3 pt-3 pnp_bg_blue max-height-viewport overflow-y-scroll">
+        <%= render "shared/tasks_sidebar", project: @projects %>
+      </div>
+    <div class="dashboard col-md-9 pt-3 max-height-viewport overflow-y-scroll">
     <div class = "container">
       <h4>Welcome to your Sticky Notes</h4>
       <%= link_to " Add a new note", new_note_path() %>
@@ -16,12 +16,14 @@
             <%= note.description %>
             <%= note.colour %>
             <%= link_to "Delete",
-                              note_path(note),
-                              method: :delete,
-                              data: { confirm: "Are you sure?" } %>
+                        note_path(note),
+                        method: :delete,
+                        data: { confirm: "Are you sure?" } %>
           </div>
         <% end %>
       </div>
     </div>
+  </div>
+     </div>
   </div>
 <% end %>

@@ -74,14 +74,18 @@ project1 = Project.create(
   name: "Develop PNP App",
   created_by: user1,
   progress: 90,
+  start_date: DateTime.now() - 30,
+  end_date: DateTime.now() + 10,
   status: "in_progress",
 )
 
 project2 = Project.create(
   name: "Develop Google App",
   created_by: user1,
-  progress: 50,
-  status: "in_progress",
+  progress: 100,
+  status: "completed",
+  start_date: DateTime.now() - 100,
+  end_date: DateTime.now() - 50,
 )
 
 ProjectAssign.create(
@@ -115,6 +119,25 @@ todo = KanbanColumn.create(
 completed = KanbanColumn.create(
   name: "completed",
   kanban: my_kanban,
+)
+
+my_kanban2 = Kanban.create(
+  project: project2,
+)
+
+backlog1 = KanbanColumn.create(
+  name: "not_started",
+  kanban: my_kanban2,
+)
+
+todo1 = KanbanColumn.create(
+  name: "in_progress",
+  kanban: my_kanban2,
+)
+
+completed1 = KanbanColumn.create(
+  name: "completed",
+  kanban: my_kanban2,
 )
 
 task1 = Task.create(name: "Push to Heroku", position: 0, status: "not_started", kanban_column: backlog, priority: "low", due_date: DateTime.now() + 1)

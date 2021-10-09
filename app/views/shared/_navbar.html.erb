@@ -95,6 +95,9 @@
       <% if user_signed_in? && current_user.admin %>
         <a class="nav-link" href="<%= rails_admin_path %>">Admin Dashboard</a>
       <% end %>
+       <% if user_signed_in? && current_user.position = "Administrator" %>
+            <a class="nav-link" href="<%= users_path %>">HR</a>
+          <% end %>
       <div class="dropdown-divider border-dark"></div>
       <% if user_signed_in? %>
         <div class="dropdown">
