@@ -3,12 +3,14 @@ class PagesController < ApplicationController
 
   def home
     @unique_tasks = {}
-    current_user.tasks.each do |task|
-      if task.users.include?(current_user)
-        if @unique_tasks[task.status]
-          @unique_tasks[task.status] += 1
-        else
-          @unique_tasks[task.status] = 1
+    if current_user.tasks
+      current_user.tasks.each do |task|
+        if task.users.include?(current_user)
+          if @unique_tasks[task.status]
+            @unique_tasks[task.status] += 1
+          else
+            @unique_tasks[task.status] = 1
+          end
         end
       end
     end
