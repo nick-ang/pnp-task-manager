@@ -5,7 +5,7 @@
       <div class="sidebar col-md-3 pt-3 pnp_bg_blue">
         <%= render "shared/projects_sidebar", project: @projects %>
       </div>
-      <div id="project-container" class="col-md-9 p-5 bg-white">
+      <div id="project-container" class="col-md-9 pr-5 pl-5 bg-white">
         <% # Show all projects %>
         <% project = @project %>
         <% if project.user_ids.include?(current_user.id) || current_user.id == project.created_by || current_user.admin %>
