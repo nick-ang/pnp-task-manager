@@ -32,7 +32,7 @@
               <%= "Pay Due in Next Two Days? #{user.pay_due}" %>
               <% init = 0 %>
               <br>
-              <% current_user.projects.each do |project| %>
+              <% Project.all.each do |project| %>
                 <% project.tasks.each do |task| %>
                   <% if task.user_ids.include?(user.id) && task.duration %>
                     <% init += task.duration %>
