@@ -1,4 +1,4 @@
-.github/workflows/main.yml
+
 name: CI
 
 on:
@@ -52,26 +52,4 @@ jobs:
           name: code-coverage
           path: coverage/
 
-  security:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-
-      - name: Setup Ruby
-        uses: ruby/setup-ruby@v1.45.0
-        with:
-          ruby-version: 2.7.1
-
-      - name: Install Brakeman
-        run: |
-          gem install brakeman
-
-      - name: Run Brakeman
-        run: |
-          brakeman -f json > tmp/brakeman.json || exit 0
-
-      - name: Brakeman Report
-        uses: devmasx/brakeman-linter-action@v1.0.0
-        env:
-          REPORT_PATH: tmp/brakeman.json
-          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+ 
