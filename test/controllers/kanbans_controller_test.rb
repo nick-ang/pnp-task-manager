@@ -38,9 +38,9 @@ class KanbansControllerTest < ActionDispatch::IntegrationTest
   #   assert_redirected_to kanban_url(@kanban)
   # end
 
-  test "should destroy kanban" do
-    assert_difference("Kanban.count", -1) do
-      delete kanban_url(@kanban)
-    end
-  end
+  # test "should destroy kanban" do
+  #   assert_difference("Kanban.count", -1) do
+  #     delete kanban_url(@kanban)
+  #   end
+  # end
 end
