@@ -27,12 +27,14 @@
   background-size: cover;
 }
 
-.pnp_logo_blue_60px, .pnp_logo_white_60px {
+.pnp_logo_blue_60px,
+.pnp_logo_white_60px {
   width: 60px !important;
   height: 25px !important;
 }
 
-.pnp_logo_blue_120px, .pnp_logo_white_120px {
+.pnp_logo_blue_120px,
+.pnp_logo_white_120px {
   width: 120px !important;
   height: 50px !important;
 }
@@ -61,18 +63,18 @@ li {
 .fixed-card {
   padding: 2px;
   border-radius: 10px;
-  width:250px;
-  height:250px;
+  width: 250px;
+  height: 250px;
   background-color: white;
 
   margin: 5px;
-    margin: auto;
+  margin: auto;
   width: 350px;
   overflow: hidden;
   border-radius: 20px;
   background: white;
   margin-top: 25px;
-  margin-bottom:25px;
+  margin-bottom: 25px;
   transition: all 0.2s;
   box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.3);
   color: black;
@@ -120,25 +122,24 @@ li {
 }
 
 ::-webkit-scrollbar {
-    width: 12px;
+  width: 12px;
 }
 
-/* Track */
-::-webkit-scrollbar-track {
-    // -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
-    // -webkit-border-radius: 10px;
-    // border-radius: 10px;
-}
+// /* Track */
+// ::-webkit-scrollbar-track {
+//   // -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+//   // -webkit-border-radius: 10px;
+//   // border-radius: 10px;
+// }
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-    -webkit-border-radius: 10px;
-    border-radius: 10px;
-    background: rgba(255,0,0,0.1);
-    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5);
+  -webkit-border-radius: 10px;
+  border-radius: 10px;
+  background: rgba(255, 0, 0, 0.1);
 }
 ::-webkit-scrollbar-thumb:window-inactive {
-    background: rgba(255,0,0,0.1);
+  background: rgba(255, 0, 0, 0.1);
 }
 
 .overflow-y-scroll {
@@ -152,13 +153,13 @@ li {
   border-bottom-right-radius: 0px;
 }
 
-input[type=number]::-webkit-inner-spin-button,
-input[type=number]::-webkit-outer-spin-button {
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
 
-input[type=number] {
+input[type="number"] {
   -moz-appearance: textfield;
 }
 
@@ -228,4 +229,20 @@ input[type=number] {
 
 .kanban-col-item:active {
   cursor: grabbing;
+}
+
+.dashboard {
+  background-image: url("bg.png");
+  width: 100%;
+  // overflow: overlay;
+  background-size: cover;
+  height: 100vh;
+}
+
+#project-container {
+  background-image: url("bg.png");
+  width: 100%;
+  // overflow: overlay;
+  background-size: cover;
+  height: 100vh;
 }

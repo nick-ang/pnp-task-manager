@@ -15,7 +15,7 @@
       </li>
       <% column.tasks.sort_by{ |task| task.position || 0}.each do |item| %>
         <li class="kanban-col-item" data-item-id=<%= item.id %> >
-          <div class="card border border-secondary bg-white rounded-lg px-2 py-2">
+          <div class="card border border-secondary px-2 py-2">
             <div class="task card-body p-0 py-1">
               <div class="d-flex align-items-center">
                 <h5 class="card-title flex-grow-1 mb-0">
