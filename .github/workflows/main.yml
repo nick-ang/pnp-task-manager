@@ -54,10 +54,10 @@ jobs:
       - name: Run model tests
         run: bundle exec rails test
       - name: Run system tests
-        run: bundle exec rails test:system
- Deploy:
+      
+  Deploy:
     if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/master' }}
-    needs: Test
+    needs: test
     runs-on: ubuntu-latest
 
     steps:
@@ -66,5 +66,5 @@ jobs:
         uses: akhileshns/heroku-deploy@v3.6.8 # This is the action
         with:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
-          heroku_app_name: "heroku-cd-todolist" #Must be unique in Heroku
-          heroku_email: "excid3@gmail.com"
+          heroku_app_name: "pnp-task-manager" #Must be unique in Heroku
+          heroku_email: "nicholas_ang@outlook.com"
