@@ -2,9 +2,9 @@ class KanbansController < ApplicationController
   before_action :set_kanban, only: %i[ show edit update destroy ]
 
   # GET /kanbans or /kanbans.json
-  def index
-    @kanbans = Kanban.all
-  end
+  # def index
+  #   @kanbans = Kanban.all
+  # end
 
   # GET /kanbans/1 or /kanbans/1.json
   def show
