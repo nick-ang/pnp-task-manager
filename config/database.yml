@@ -32,7 +32,7 @@ development:
   #username: pnp_task_manager
 
   # The password associated with the postgres role (username).
-  #password:
+  # password: secret
 
   # Connect on a TCP socket. Omitted by default since the client uses a
   # domain socket that doesn't need configuration. Windows does not have
