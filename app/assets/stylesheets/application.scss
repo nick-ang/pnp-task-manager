@@ -232,7 +232,7 @@ input[type="number"] {
 }
 
 .dashboard {
-  background-image: url("bg.png");
+  background-image: asset-url("bg.png");
   width: 100%;
   // overflow: overlay;
   background-size: cover;
@@ -240,7 +240,7 @@ input[type="number"] {
 }
 
 #project-container {
-  background-image: url("bg.png");
+  background-image: asset-url("bg.png");
   width: 100%;
   // overflow: overlay;
   background-size: cover;
