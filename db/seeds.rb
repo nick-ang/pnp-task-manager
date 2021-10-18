@@ -9,16 +9,23 @@
 KanbanColumn.destroy_all
 Kanban.destroy_all
 Task.destroy_all
-User.destroy_all
 Wiki.destroy_all
 Note.destroy_all
 Notification.destroy_all
 Message.destroy_all
 Chatroom.destroy_all
+User.destroy_all
+Project.destroy_all
 
 # KanbanColumn.last(6).each(&:destroy)
 # Kanban.last(2).each(&:destroy)
-# Task.last(2).each(&:destroy)
+# Task.last(6).each(&:destroy)
+# Note.last(3).each(&:destroy)
+# Notification.destroy_all
+# Message.destroy_all
+# Chatroom.last(1).each(&:destroy)
+# Project.last(2).each(&:destroy)
+# User.last(3).each(&:destroy)
 
 # chat.destroy
 # chat1.destroy

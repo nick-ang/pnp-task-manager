@@ -73,7 +73,7 @@ class UsersController < ApplicationController
       end
     end
     @user.save
-    redirect_to users_path
+    redirect_to root
   end
 
   private
