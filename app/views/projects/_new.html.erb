@@ -29,10 +29,10 @@
     <div class="form-group">
       <label for="project_user_ids">Assign To*</label>
       <%= f.association :users,
-                  required: true,
-                  label: false,
-                  label_method: :first_name,
-                  wrapper_html: { class: "mb-0" } %>
+                        # required: true,
+                        label: false,
+                        label_method: :first_name,
+                        wrapper_html: { class: "mb-0" } %>
     </div>
   </div>
   <div class="modal-footer">
