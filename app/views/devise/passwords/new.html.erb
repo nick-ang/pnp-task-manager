@@ -6,7 +6,7 @@
           <div class="d-flex flex-column align-items-center h-100">
             <div class="my-auto ml-auto pnp_login_register_page">
               <%= link_to "Log In", new_session_path(resource_name), class: "btn btn-block text-white text-right" %>
-              <%= link_to "Sign Up", new_registration_path(resource_name), class: "btn btn-block text-white text-right" %>
+
               <%= link_to "Forgot Password?", new_password_path(resource_name), class: "btn btn-block bg-white pnp_login_button_radius text-right" %>
             </div>
           </div>
@@ -31,7 +31,7 @@
                             input_html: { autocomplete: "email" } %>
               </div>
             </div>
-            
+
             <div class="form-actions text-center mt-4">
               <%= f.button :submit, "Reset Password", class: "btn btn-primary" %>
             </div>
