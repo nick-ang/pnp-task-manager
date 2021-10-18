@@ -6,53 +6,57 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-# KanbanColumn.destroy_all
-# Kanban.destroy_all
-# Task.destroy_all
-# User.destroy_all
-# Wiki.destroy_all
-# Note.destroy_all
-# Notification.destroy_all
-# Message.destroy_all
-# Chatroom.destroy_all
+KanbanColumn.destroy_all
+Kanban.destroy_all
+Task.destroy_all
+User.destroy_all
+Wiki.destroy_all
+Note.destroy_all
+Notification.destroy_all
+Message.destroy_all
+Chatroom.destroy_all
 
-chat.destroy
-chat1.destroy
-chat2.destroy
-note1.destroy
-note2.destroy
-note3.destroy
-task1.destroy
-task2.destroy
-task3.destroy
-task4.destroy
-task5.destroy
-task6.destroy
-backlog.destroy
-todo.destroy
-todo2.destroy
-completed.destroy
-completed2.destroy
-todo2.destroy
-backlog2.destroy
-my_kanban2.destroy
-my_kanban.destroy
-assign1.destroy
-assign2.destroy
-assign3.destroy
-assign4.destroy
-assign5.destroy
-assign6.destroy
-assign7.destroy
-assign8.destroy
-assign9.destroy
-assign10.destroy
-assign11.destroy
-user1.destroy
-user2.destroy
-user3.destroy
-project1.destroy
-project2.destroy
+# KanbanColumn.last(6).each(&:destroy)
+# Kanban.last(2).each(&:destroy)
+# Task.last(2).each(&:destroy)
+
+# chat.destroy
+# chat1.destroy
+# chat2.destroy
+# note1.destroy
+# note2.destroy
+# note3.destroy
+# task1.destroy
+# task2.destroy
+# task3.destroy
+# task4.destroy
+# task5.destroy
+# task6.destroy
+# backlog.destroy
+# todo.destroy
+# todo2.destroy
+# completed.destroy
+# completed2.destroy
+# todo2.destroy
+# backlog2.destroy
+# my_kanban2.destroy
+# my_kanban.destroy
+# assign1.destroy
+# assign2.destroy
+# assign3.destroy
+# assign4.destroy
+# assign5.destroy
+# assign6.destroy
+# assign7.destroy
+# assign8.destroy
+# assign9.destroy
+# assign10.destroy
+# assign11.destroy
+# user1.destroy
+# user2.destroy
+# user3.destroy
+# project1.destroy
+# project2.destroy
 
 user1 = User.create(
   first_name: "Nick",
