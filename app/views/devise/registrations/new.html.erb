@@ -16,7 +16,7 @@
           <p class="pnp_logo_blue pnp_logo_blue_120px mx-auto"></p>
 
           <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-            <input type="hidden" name="user[position]" id="user_position" value="employee">
+            <input type="hidden" name="user[position]" id="user_position" value="Employee">
 
             <div class="form-group row mt-4">
               <label for="user_first_name" class="col-sm-3 col-form-label">First Name*</label>
@@ -80,7 +80,7 @@
                     <option value="male">Male</option>
                     <option value="female">Female</option>
                   </select>
-                  
+
                   <small class="form-text text-muted">Please select your gender</small>
                 </div>
               </div>
@@ -112,7 +112,7 @@
                             input_html: { autocomplete: "new-password" } %>
               </div>
             </div>
-            
+
             <div class="form-actions text-center mt-4">
               <%= f.button :submit, "Sign Up", class: "btn btn-primary" %>
             </div>

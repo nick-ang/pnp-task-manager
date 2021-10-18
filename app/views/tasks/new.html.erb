@@ -3,7 +3,7 @@
   <%= f.input :description %>
   <%= f.input :due_date %>
    <%= f.input :duration %>
-  <% if current_user.position != "employee" %>
+  <% if current_user.position != "Employee" %>
     <%= f.association :users, label_method: :first_name %>
   <% end %>
   <%= f.input :status, collection: Task.statuses.keys %>

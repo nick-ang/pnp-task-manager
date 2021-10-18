@@ -8,7 +8,7 @@
     </div>
     <div class = "col-12">
       <% # Check employee position allow to create project if not employee %>
-      <% if current_user.position != "employee" %>
+      <% if current_user.position != "Employee" %>
         <h1><%= link_to "Add a Project", new_project_path() %><br>
         </h1>
       <% end %>

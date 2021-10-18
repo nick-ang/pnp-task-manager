@@ -2,7 +2,7 @@
   <div class = "project-card">
     <h2><%= "Project: #{project.name}" %></h2>
     <br>
-    <%#= "Start Date: #{project.start_date.strftime("%d %B")}" %><br>
+    <% #= "Start Date: #{project.start_date.strftime("%d %B")}" %><br>
     <%= "Status: #{project.status}" %><br>
     <%= "Progress: #{project.progress} %" %><br>
     <% # tasks status %>
@@ -17,21 +17,21 @@
     <% # project Team Members %>
     <% "Project Team Members: #{array_project = project.users.each} " %>
     <% array_project.map do |id|
-                     id.first_name
-                   end %>
+         id.first_name
+       end %>
     <%= "Project Team Members: " %>
     <% array_project.each do |user| %>
       <%= "#{user.first_name}  |  " %>
     <% end %>
     <br>
     <%= link_to " Add a task to this project", new_project_task_path(project) %>
-    <% if current_user.position != "employee" %>
+    <% if current_user.position != "Employee" %>
       <br>
       <%= link_to "Edit this project", edit_project_path(project) %><br>
       <%= link_to "Delete",
-                              project_path(project),
-                              method: :delete,
-                              data: { confirm: "Are you sure?" } %>
+                  project_path(project),
+                  method: :delete,
+                  data: { confirm: "Are you sure?" } %>
     <% end %>
   </div>
 </div>
