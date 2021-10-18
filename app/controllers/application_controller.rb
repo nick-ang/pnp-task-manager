@@ -24,17 +24,17 @@ class ApplicationController < ActionController::Base
     end
     if current_user
       @notifications = current_user.notifications.unread
-      # if current_user.admin?
-      #   @projects = Project.all
-      #   @kanbans = Kanban.all
-      #   @kanban_columns = KanbanColumn.all
-      #   @chatrooms = Chatroom.all
-      # else
-      @projects = current_user.projects
-      @kanbans = current_user.kanbans
-      @kanban_columns = current_user.kanban_columns
-      @chatrooms = Chatroom.all
-      # end
+      if current_user.admin?
+        @projects = Project.all
+        @kanbans = Kanban.all
+        @kanban_columns = KanbanColumn.all
+        @chatrooms = Chatroom.all
+      else
+        @projects = current_user.projects
+        @kanbans = current_user.kanbans
+        @kanban_columns = current_user.kanban_columns
+        @chatrooms = Chatroom.all
+      end
       @users = User.all
       if current_user.admin?
         @tasks = current_user.tasks
