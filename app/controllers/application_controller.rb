@@ -48,8 +48,8 @@ class ApplicationController < ActionController::Base
   def demo_user
     @project_new = Project.new
     @project_edit = Project.new
-    if User.all.length > 6
-      @demo = User.find(5)
+    if User.all.length > 5
+      @demo = User.find(6)
     else
       @demo = User.first
     end
