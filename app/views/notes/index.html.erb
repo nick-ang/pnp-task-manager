@@ -11,8 +11,9 @@
       <%= link_to " Add a new note", new_note_path() %>
       <br>
       <div class = "note-grid container mb-5">
+      <% colorhash = { "Red" => "#ffa9a9", "Green" => "#92f792", "Yellow" => "#ffff8e" } %>
         <% @notes.each do |note| %>
-          <div class = "fixed-card p-5" style="background-color: <%= note.colour %>">
+          <div class = "fixed-card p-5" style="background-color: <%= colorhash[note.colour] %>">
             <h3><%= link_to "Title: #{note.title}", edit_note_path(note) %></h3>
             <h4><%= note.description %></h4>
             <%= link_to "Delete",
