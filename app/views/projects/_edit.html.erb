@@ -28,22 +28,22 @@
     </div>
     <div class="form-group">
       <label for="project_user_ids">Assign To*</label>
-      <%= f.association :users,
+      <%#= f.association :users,
                   required: true,
                   label: false,
                   label_method: :first_name,
                   wrapper_html: { class: "mb-0" } %>
     </div>
   </div>
-  <%= f.input :name %>
-  <%= f.input :progress,
+  <%#= f.input :name %>
+  <%#= f.input :progress,
               required: true,
               hint: "Enter in %" %>
-  <%= f.input :end_date %>
-  <%= f.input :start_date %>
-  <%= f.association :users, label_method: :first_name %>
-  <%= f.input :status, collection: Project.statuses.keys %>
-  <%= f.input :created_by, :as => :hidden, :input_html => { :value => current_user.id }, label: "Created_by User ID:" %>
+  <%#= f.input :end_date %>
+  <%#= f.input :start_date %>
+  <%#= f.association :users, label_method: :first_name %>
+  <%#= f.input :status, collection: Project.statuses.keys %>
+
   <div class="modal-footer">
     <button type="button" class="btn btn-secondary" data-dismiss="modal" aria-label="Close">Cancel</button>
     <%= f.submit "Update Project", class: "btn btn-primary" %>
