@@ -10,6 +10,6 @@
   <% end %>
   <%= f.input :status, collection: Task.statuses.keys %>
   <%= f.input :priority, collection: Task.priorities.keys %>
-  <%= f.input :created_by, :as => :hidden, :input_html => { :value => current_user.id }, label: "Created_by User ID:" %>
+  <%= f.input :created_by, :as => :hidden, :input_html => { :value => current_user.id } %>
   <%= f.submit %>
 <% end %>
