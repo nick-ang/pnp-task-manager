@@ -7,14 +7,16 @@
       </div>
       <div class="dashboard col-md-9 pt-3 max-height-viewport overflow-y-scroll">
         <div class="container bg-white border-0 rounded-lg">
-          <h5 class="mt-2">All Projects Progress %</h5>
+          <h5 class="font-weight-bold mt-2">All Projects Progress %</h5>
+          <br>
           <%= bar_chart @projects.group(:name).sum(:progress) %>
         </div>
         <div class="container pb-5">
           <div class="row mt-2">
             <div class="col-7 bg-white border-0 rounded-lg">
-              <h5 class="mt-2">My Tasks</h5>
-              <%= pie_chart @unique_tasks %>
+              <h5 class=" font-weight-bold mt-2">My Tasks</h5>
+              <br>
+              <%= pie_chart @unique_tasks, library: { backgroundColor: "red" } %>
             </div>
 
 
@@ -23,9 +25,9 @@
               <div class="container">
                 <div class="row">
                   <div class="deadlines col-12 bg-white border-0 rounded-lg">
-                    <h5 class="mt-2">Deadlines</h5>
+                    <h5 class=" font-weight-bold mt-2">Deadlines</h5>
+                    <br>
                     <div class="deadlines-projects">
-                      <h6>Projects</h6>
                       <% @projects.each do |project| %>
     <% if project.user_ids.include?(current_user.id) || current_user.id == project.created_by || current_user.admin %>
       <% if request.fullpath.last.to_i == project.id %>
