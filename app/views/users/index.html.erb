@@ -25,14 +25,17 @@
           <h2>Search Results:</h2>
           <% @search.each do |user| %>
             <div class = "card p-2">
+
               <%= link_to "#{user.first_name} #{user.last_name} ", edit_user_path(user) %><br>
-              <%= "Email: #{user.email}, Position: #{user.position}, Phone: #{user.phone}, #{user.gender}, Pay: #{user.salary}, Id: #{user.id}" %>
+                            <% if user.pay_due == "Yes" %>
+                <span class="badge badge-pill badge-danger">Due</span>
+                <br>
+              <% end %>
+              <%= "Email: #{user.email}, Position: #{user.position}, Phone: 0#{user.phone}, Gender: #{user.gender}, Pay: #{user.salary}, Id: #{user.id}" %>
               <br>
               <%= "Pay Due in Next Two Days? #{user.pay_due}" %>
-              <% if user.pay_due == "Yes" %>
-                <span class="badge badge-pill badge-danger">Due</span>
-              <% end %>
               <% init = 0 %>
+              <br>
               <% Project.all.each do |project| %>
                 <% project.tasks.each do |task| %>
                   <% if task.user_ids.include?(user.id) && task.duration %>
