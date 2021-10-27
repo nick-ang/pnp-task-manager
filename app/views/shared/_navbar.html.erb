@@ -47,7 +47,7 @@
                   <% end %>
                 </a>
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="notificationDropdownMenuButton">
-                  <% if @notifications %>
+                  <% if @notifications.length > 0 %>
                     <% @notifications.order(id: :desc).each do |notification| %>
                       <%= link_to notification.to_notification.message, notification.to_notification.url %>
                       <%= link_to notification_path(notification),
@@ -59,6 +59,7 @@
                         <br>
                       <% end %>
                     <% end %>
+                    <% else %>
                     <p class="dropdown-header">No new notifications!</p>
                   <% end %>
                 </div>
@@ -105,15 +106,31 @@
       <% if user_signed_in? %>
         <div class="dropdown">
           <a class="border-0 pl-0 text-primary btn dropdown-toggle pnp_navbar_dropdown_icon" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Notifications <i class="bi bi-bell"></i>
+            Notifications                   <% if @notifications.length > 0 %>
+                    <i class="bi bi-bell-fill"></i>
+                  <% else %>
+                    <i class="bi bi-bell"></i>
+                  <% end %>
           </a>
           <div class="dropdown-menu dropdown-menu-right" aria-labelledby="notificationDropdownMenuButton">
-            <% if @notifications %>
-              <% @notifications.order(id: :desc).each do |notification| %>
-                <%= link_to notification.to_notification.message, notification.to_notification.url %>
-              <% end %>
-              <p class="dropdown-header">No new notifications!</p>
-            <% end %>
+
+<% if @notifications.length > 0 %>
+
+                    <% @notifications.each do |notification| %>
+                      <%= link_to notification.to_notification.message, notification.to_notification.url %>
+                      <%= link_to notification_path(notification),
+                                  method: :delete,
+                                  "data-toggle" => "tooltip",
+                                  "data-placement" => "top",
+                                  title: "Clear notification" do %>
+                        <i class="bi bi-trash" style="font-size: 1.25rem;"></i>
+                        <br>
+                      <% end %>
+                    <% end %>
+
+                  <% else %>
+                   <p class="dropdown-header">No new notifications!</p>
+                   <% end %>
           </div>
         </div>
         <div class="dropdown">
