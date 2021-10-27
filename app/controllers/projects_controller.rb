@@ -6,7 +6,6 @@ class ProjectsController < ApplicationController
   end
 
   def show
-    @project = Project.new
     @project_edit = Project.find(params[:id])
     @projects = Project.all
     @kanbans = current_user.kanbans
