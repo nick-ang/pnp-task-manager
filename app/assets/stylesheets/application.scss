@@ -54,6 +54,15 @@ li {
   list-style-type: none;
 }
 
+.sidebar {
+  overflow: auto;
+  height: 100vh;
+}
+
+.simple_form {
+  padding: 50px;
+}
+
 .project-card {
   padding: 2px;
   border-radius: 10px;
