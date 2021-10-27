@@ -1,4 +1,5 @@
 <nav class="nav flex-column">
+ <h3 class="text-white font-weight-bold navbar-brand">Projects</h3>
   <!-- Get Projects -->
   <% @projects.each do |project| %>
     <% if project.user_ids.include?(current_user.id) %>
