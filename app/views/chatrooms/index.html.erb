@@ -13,7 +13,7 @@
           <% @chatrooms.each do |chatroom| %>
             <% "Chat Members: #{array_project = chatroom.users.each} " %>
             <% if array_project.include?(current_user) || current_user.admin %>
-              <div class = "card">
+              <div class = "card p-3">
                 <%= link_to chatroom.name, chatroom_path(chatroom) %>
                 <% array_project.map do |id|
                      id.first_name

@@ -9,7 +9,7 @@
         <div class ="wrapper w-100 p-2" >
           <h1>HR Payroll and Employee Details</h1>
           <br>
-          <div class = "card p-2">
+          <div class = "card p-3">
             <h2>Search for an employee.</h2>
             <%= search_form_for [@q] do |f| %>
               <%= f.label :email_cont %>
@@ -24,7 +24,7 @@
           <br>
           <h2>Search Results:</h2>
           <% @search.each do |user| %>
-            <div class = "card p-2">
+            <div class = "card p-3">
               <h5 class="card-title flex-grow-1 mb-0">
 
                 <%= link_to "#{user.first_name} #{user.last_name} ", edit_user_path(user) %>
