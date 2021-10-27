@@ -2,13 +2,13 @@
   <%= simple_form_for (@project) do |f| %>
     <%= f.input :name %>
     <%= f.input :progress,
-              required: true,
-              hint: "Enter in %" %>
+                required: true,
+                hint: "Enter in %" %>
     <%= f.input :start_date, as: :date, html5: true %>
     <%= f.input :end_date, as: :date, html5: true %>
     <%= f.association :users, label_method: :first_name %>
     <%= f.input :status, collection: Project.statuses.keys %>
-    <%= f.input :created_by, :as => :hidden, :input_html => { :value => current_user.id }, label: "Created_by User ID:" %>
+    <%= f.input :created_by, :as => :hidden, :input_html => { :value => current_user.id } %>
     <%= f.submit %>
   <% end %>
 </div>
