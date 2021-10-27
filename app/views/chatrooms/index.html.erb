@@ -5,9 +5,10 @@
       <div class="col-md-3 pt-3 pnp_bg_blue max-height-viewport overflow-y-scroll">
         <%= render "shared/tasks_sidebar", project: @projects %>
       </div>
-      <div class="dashboard col-md-9 pt-3 max-height-viewport overflow-y-scroll">
-        <div class = "container">
-          <h1>Welcome to the Company chatroom Database</h1>
+     <div class="dashboard col-md-9 pt-3 max-height-viewport overflow-y-scroll">
+        <div class ="wrapper w-100 p-2" >
+          <h1>Welcome to the Company Chatrooms</h1>
+          <br>
           <br>
           <% @chatrooms.each do |chatroom| %>
             <% "Chat Members: #{array_project = chatroom.users.each} " %>

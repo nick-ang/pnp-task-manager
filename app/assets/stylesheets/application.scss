@@ -77,12 +77,11 @@ li {
 .fixed-card {
   padding: 2px;
   border-radius: 10px;
-  width: 250px;
-  height: 250px;
+  // width: 250px;
+  // height: 250px;
   background-color: white;
-
-  margin: 5px;
-  margin: auto;
+  margin-right: 25px;
+  margin-left: 25px;
   width: 350px;
   overflow: hidden;
   border-radius: 20px;
@@ -123,6 +122,11 @@ li {
   overflow: hidden;
   overflow-y: scroll;
   padding: 5px;
+}
+
+.note-grid {
+  justify-content: space-evenly;
+
 }
 
 // Minimum height of the viewport - navbar
@@ -194,6 +198,14 @@ input[type="number"] {
     border-radius: 10px !important;
     text-align: center !important;
   }
+}
+
+.dropdown-menu{
+  padding:20px;
+}
+
+#dropdownMenuLink{
+  color: #167FFB;
 }
 
 // // .tasks-card {

@@ -5,9 +5,10 @@
 <div class="col-md-3 pt-3 pnp_bg_blue max-height-viewport overflow-y-scroll">
         <%= render "shared/tasks_sidebar", project: @projects %>
       </div>
-    <div class="dashboard col-md-9 pt-3 max-height-viewport overflow-y-scroll">
-    <div class = "container">
-      <h1>Welcome to your Sticky Notes</h1>
+<div class="dashboard col-md-9 pt-3 max-height-viewport overflow-y-scroll">
+        <div class ="wrapper w-100 p-2" >
+          <h1>Welcome to your Sticky Notes</h1>
+          <br>
       <%= link_to " Add a new note", new_note_path() %>
       <br>
       <div class = "note-grid container mb-5">
