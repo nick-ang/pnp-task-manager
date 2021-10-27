@@ -29,12 +29,7 @@ class ChatroomsController < ApplicationController
 
   def destroy
     @chatroom = Chatroom.find(params[:id])
-    @notifications = Notification.all
-    # @notifications.each do |notification|
-    #   if Notification.first.params[:message].chatroom_id == @chatroom.id
-    #     notification.destroy
-    #   end
-    # end
+    @notifications = Notification.destroy_all(chatroom_id: @chatroom.id)
     @chatroom.destroy
     redirect_to chatrooms_path
   end
