@@ -3,89 +3,95 @@
   <!-- Get Projects -->
   <% @projects.each do |project| %>
     <% if project.user_ids.include?(current_user.id) || current_user.id == project.created_by || current_user.admin %>
-      <% if request.fullpath.last.to_i == project.id %>
+      <% if request.fullpath.last(2).to_i == project.id %>
         <div class="card border border-info bg-info  mb-3 px-2 py-3">
-        <% else %>
-          <div class="card border border-secondary  mb-3 px-2 py-3">
-          <% end %>
-          <div class="card-body p-0 py-1">
-            <div class="d-flex">
-              <h4 class="card-title flex-grow-1 mb-0">
-                <%= link_to "#{project.name}", project_path(project), class: "nav-link active mb-0 pl-0" %>
-              </h4>
-              <%= link_to new_project_task_path(project), class: "mr-2", "data-toggle" => "tooltip", "data-placement" => "top", title: "Add New Task" do %>
-                <i class="bi bi-file-earmark-plus" style="font-size: 1.25rem;"></i>
-              <% end %>
-              <%= link_to edit_project_path(project), class: "mr-2", title: "Edit Project" do %>
-                <i class="bi bi-pencil" style="font-size: 1.25rem;"></i>
-              <% end %>
-              <%= link_to project_path(project),
-                          method: :delete,
-                          data: { confirm: "Are you sure?" },
-                          "data-toggle" => "tooltip",
-                          "data-placement" => "top",
-                          title: "Delete Project" do %>
-                <i class="bi bi-trash" style="font-size: 1.25rem;"></i>
-              <% end %>
-            </div>
-            <% @total = project.tasks.count %>
-            <% @complete = project.tasks.completed.count %>
-            <% if @complete > 0 && @total > 0 %>
-              <% @percent = (@complete.to_f / @total) * 100 %>
+        <% elsif request.fullpath.last(2).to_i == 0 %>
+          <% if request.fullpath.last.to_i == project.id %>
+            <div class="card border border-info bg-info  mb-3 px-2 py-3">
             <% else %>
-              <% @percent = 0 %>
+            <div class="card border border-secondary  mb-3 px-2 py-3">
             <% end %>
-            <% @start_date = project.start_date %>
-            <% @end_date = project.end_date %>
-            <% if @start_date && @end_date %>
-              <% @proj_days = (@end_date - @start_date) / 60 / 60 / 24 %>
-              <% @now = DateTime.now %>
-              <% @days_left = (@start_date - @now) * -1 / 60 / 60 / 24 %>
-              <% if @days_left > 0 && @proj_days > 0 %>
-                <% if (@days_left / @proj_days.to_f) * 100 > 101 %>
-                  <% @percent_day = 100 %>
-                <% else %>
-                  <% @percent_day = (@days_left / @proj_days.to_f) * 100 %>
+          <% else %>
+            <div class="card border border-secondary  mb-3 px-2 py-3">
+            <% end %>
+            <div class="card-body p-0 py-1">
+              <div class="d-flex">
+                <h4 class="card-title flex-grow-1 mb-0">
+                  <%= link_to "#{project.name}", project_path(project), class: "nav-link active mb-0 pl-0" %>
+                </h4>
+                <%= link_to new_project_task_path(project), class: "mr-2", "data-toggle" => "tooltip", "data-placement" => "top", title: "Add New Task" do %>
+                  <i class="bi bi-file-earmark-plus" style="font-size: 1.25rem;"></i>
                 <% end %>
+                <%= link_to edit_project_path(project), class: "mr-2", title: "Edit Project" do %>
+                  <i class="bi bi-pencil" style="font-size: 1.25rem;"></i>
+                <% end %>
+                <%= link_to project_path(project),
+                            method: :delete,
+                            data: { confirm: "Are you sure?" },
+                            "data-toggle" => "tooltip",
+                            "data-placement" => "top",
+                            title: "Delete Project" do %>
+                  <i class="bi bi-trash" style="font-size: 1.25rem;"></i>
+                <% end %>
+              </div>
+              <% @total = project.tasks.count %>
+              <% @complete = project.tasks.completed.count %>
+              <% if @complete > 0 && @total > 0 %>
+                <% @percent = (@complete.to_f / @total) * 100 %>
               <% else %>
-                <% @percent_day = 0 %>
+                <% @percent = 0 %>
               <% end %>
-            <% end %>
-            <div class="progress my-2">
-              <div class="progress-bar" role="progressbar" style="width: <%= project.progress %>%" aria-valuenow="<%= project.progress %>" aria-valuemin="0" aria-valuemax="100"><%= "Overall #{project.progress}" %>%</div>
-            </div>
-            <div class="progress my-2">
-              <div class="progress-bar bg-success progress-bar-stripped" role="progressbar" style="width: <%= @percent.to_i %>%" aria-valuenow="<%= @percent.to_i %>" aria-valuemin="0" aria-valuemax="100"><%= "Tasks #{@percent.to_i}" %>%</div>
-            </div>
-            <div class="progress my-2">
-              <div class="progress-bar bg-warning progress-bar-stripped" role="progressbar" style="width: <%= @percent_day.to_i %>%" aria-valuenow="<%= @percent_day.to_i %>" aria-valuemin="0" aria-valuemax="100"><%= "Date #{@percent_day.to_i}" %>%</div>
-            </div>
-            <div class="row">
-              <% if project.start_date %>
-                <div class="col-6">
-                  <p class="mb-0 small">Start Date</p>
-                  <p class="mb-0"><%= project.start_date.strftime("%d %B %Y") %></p>
-                </div>
+              <% @start_date = project.start_date %>
+              <% @end_date = project.end_date %>
+              <% if @start_date && @end_date %>
+                <% @proj_days = (@end_date - @start_date) / 60 / 60 / 24 %>
+                <% @now = DateTime.now %>
+                <% @days_left = (@start_date - @now) * -1 / 60 / 60 / 24 %>
+                <% if @days_left > 0 && @proj_days > 0 %>
+                  <% if (@days_left / @proj_days.to_f) * 100 > 101 %>
+                    <% @percent_day = 100 %>
+                  <% else %>
+                    <% @percent_day = (@days_left / @proj_days.to_f) * 100 %>
+                  <% end %>
+                <% else %>
+                  <% @percent_day = 0 %>
+                <% end %>
               <% end %>
-              <% if project.end_date %>
-                <div class="col-6">
-                  <p class="mb-0 small">Due Date</p>
-                  <p class="mb-0"><%= project.end_date.strftime("%d %B %Y") %></p>
-                </div>
-              <% end %>
+              <div class="progress my-2">
+                <div class="progress-bar" role="progressbar" style="width: <%= project.progress %>%" aria-valuenow="<%= project.progress %>" aria-valuemin="0" aria-valuemax="100"><%= "Overall #{project.progress}" %>%</div>
+              </div>
+              <div class="progress my-2">
+                <div class="progress-bar bg-success progress-bar-stripped" role="progressbar" style="width: <%= @percent.to_i %>%" aria-valuenow="<%= @percent.to_i %>" aria-valuemin="0" aria-valuemax="100"><%= "Tasks #{@percent.to_i}" %>%</div>
+              </div>
+              <div class="progress my-2">
+                <div class="progress-bar bg-warning progress-bar-stripped" role="progressbar" style="width: <%= @percent_day.to_i %>%" aria-valuenow="<%= @percent_day.to_i %>" aria-valuemin="0" aria-valuemax="100"><%= "Date #{@percent_day.to_i}" %>%</div>
+              </div>
+              <div class="row">
+                <% if project.start_date %>
+                  <div class="col-6">
+                    <p class="mb-0 small">Start Date</p>
+                    <p class="mb-0"><%= project.start_date.strftime("%d %B %Y") %></p>
+                  </div>
+                <% end %>
+                <% if project.end_date %>
+                  <div class="col-6">
+                    <p class="mb-0 small">Due Date</p>
+                    <p class="mb-0"><%= project.end_date.strftime("%d %B %Y") %></p>
+                  </div>
+                <% end %>
+              </div>
             </div>
+          </div>
+        <% end %>
+      <% end %>
+      <% if current_user.position != "Employee" %>
+        <div class="card border border-secondary text-center">
+          <div class="card-body p-0 py-1">
+            <i class="bi bi-plus" style="font-size: 1.75rem;"></i>
+            <h5 class="card-title mb-0 mt-n2 p-2">
+              <%= link_to "Add New Project", new_project_path %>
+            </h5>
           </div>
         </div>
       <% end %>
-    <% end %>
-    <% if current_user.position != "Employee" %>
-      <div class="card border border-secondary text-center">
-        <div class="card-body p-0 py-1">
-          <i class="bi bi-plus" style="font-size: 1.75rem;"></i>
-          <h5 class="card-title mb-0 mt-n2 p-2">
-            <%= link_to "Add New Project", new_project_path %>
-          </h5>
-        </div>
-      </div>
-    <% end %>
-  </div>
+    </div>
