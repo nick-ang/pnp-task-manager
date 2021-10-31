@@ -29,7 +29,7 @@ class ChatroomsController < ApplicationController
 
   def destroy
     @chatroom = Chatroom.find(params[:id])
-    @notifications = Notification.destroy_all(chatroom_id: @chatroom.id)
+    Notification.destroy_all
     @chatroom.destroy
     redirect_to chatrooms_path
   end
