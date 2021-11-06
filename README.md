@@ -1,6 +1,6 @@
 A productivity app designed for P&NP to aid project management
 
-Heroku Clone:
+Heroku Clone Free Tier Example:
 
 https://pnp-task-manager.herokuapp.com/
 
