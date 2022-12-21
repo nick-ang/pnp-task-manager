@@ -4,7 +4,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 ruby '3.1.2'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails', branch: 'main'
-gem 'rails', '~> 7.0', '>= 7.0.4'
+gem "rails", "~> 6.1.4", ">= 6.1.4.1"
 # Use postgresql as the database for Active Record
 gem 'pg', '~> 1.1'
 # Use Puma as the app server
@@ -64,7 +64,7 @@ end
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 gem "chartkick"
-gem "rails_admin", "~> 3.1.1"
+gem "rails_admin", "~> 2.0"
 gem "ransack", github: "activerecord-hackery/ransack"
 
 gem "noticed", "~> 1.4", ">= 1.4.1"
