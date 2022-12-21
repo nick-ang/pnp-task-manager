@@ -70,3 +70,6 @@ gem "ransack", github: "activerecord-hackery/ransack"
 gem "noticed", "~> 1.4", ">= 1.4.1"
 gem "sentry-ruby"
 gem "sentry-rails"
+gem 'net-smtp', require: false
+gem 'net-imap', require: false
+gem 'net-pop', require: false
