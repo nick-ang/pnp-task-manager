@@ -30,8 +30,8 @@ gem 'bootsnap', '>= 1.4.4', require: false
 
 gem 'devise'
 
-gem 'autoprefixer-rails', '10.2.5'
-gem 'font-awesome-sass'
+gem 'autoprefixer-rails', '10.4.7.0'
+gem "font-awesome-sass", "~> 6.1"
 gem 'simple_form'
 group :development, :test do  gem 'pry-byebug'
   gem 'pry-rails'
@@ -74,3 +74,4 @@ gem 'net-smtp', require: false
 gem 'net-imap', require: false
 gem 'net-pop', require: false
 gem 'nokogiri', '~> 1.13', '>= 1.13.10'
+gem "execjs", "2.8.1"

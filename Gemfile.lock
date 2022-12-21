@@ -81,8 +81,8 @@ GEM
       tzinfo (~> 2.0)
     addressable (2.8.1)
       public_suffix (>= 2.0.2, < 6.0)
-    autoprefixer-rails (10.2.5.0)
-      execjs (< 2.8.0)
+    autoprefixer-rails (10.4.7.0)
+      execjs (~> 2)
     bcrypt (3.1.18)
     bindex (0.8.1)
     bootsnap (1.15.0)
@@ -116,7 +116,7 @@ GEM
       dotenv (= 2.8.1)
       railties (>= 3.2)
     erubi (1.11.0)
-    execjs (2.7.0)
+    execjs (2.8.1)
     ffi (1.15.5)
     ffi-compiler (1.0.1)
       ffi (>= 1.0.0)
@@ -326,14 +326,15 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  autoprefixer-rails (= 10.2.5)
+  autoprefixer-rails (= 10.4.7.0)
   bootsnap (>= 1.4.4)
   byebug
   capybara (>= 3.26)
   chartkick
   devise
   dotenv-rails
-  font-awesome-sass
+  execjs (= 2.8.1)
+  font-awesome-sass (~> 6.1)
   jbuilder (~> 2.7)
   listen (~> 3.3)
   net-imap
